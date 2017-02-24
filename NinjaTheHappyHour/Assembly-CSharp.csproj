@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\BotaoFecharApp.cs" />
      <Compile Include="Assets\Scripts\BotaoLogin.cs" />
      <Compile Include="Assets\Scripts\IntegracaoSteam.cs" />
+     <Compile Include="Assets\Scripts\StartLogos.cs" />
      <Compile Include="Assets\Scripts\Steamworks.NET\SteamManager.cs" />
      <None Include="Assets\Plugins\Steamworks.NET\redist\steam_appid.txt" />
  <Reference Include="UnityEngine.UI">
