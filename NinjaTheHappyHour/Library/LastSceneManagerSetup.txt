@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Startup_LogoMarcas.unity
+- path: Assets/Scenes/MenuDeLogin.unity
   isLoaded: 1
   isActive: 1
