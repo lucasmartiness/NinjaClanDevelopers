@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\BotaoFecharApp.cs" />
      <Compile Include="Assets\Scripts\BotaoLogin.cs" />
+     <Compile Include="Assets\Scripts\Esperimental\MoveOffset.cs" />
      <Compile Include="Assets\Scripts\IntegracaoSteam.cs" />
      <Compile Include="Assets\Scripts\LogosForCanvas.cs" />
      <Compile Include="Assets\Scripts\SetPlayName.cs" />
