@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveOffset : MonoBehaviour {
+
     public float speed = 0.2f;
     Renderer render;
     // Use this for initialization

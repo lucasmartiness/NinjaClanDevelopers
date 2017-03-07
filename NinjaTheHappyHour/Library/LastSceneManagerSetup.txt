@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Startup_LogoMarcas.unity
+- path: Assets/Scenes/EstudoPercistenciaDados.unity
   isLoaded: 1
   isActive: 1
