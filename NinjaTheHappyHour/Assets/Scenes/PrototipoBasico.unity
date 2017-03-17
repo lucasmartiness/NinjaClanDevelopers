@@ -546,7 +546,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4005189876231836, guid: a9ad9dccfd2e22e4884d0043e8219717, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.29
+      value: 3.22
       objectReference: {fileID: 0}
     - target: {fileID: 4005189876231836, guid: a9ad9dccfd2e22e4884d0043e8219717, type: 2}
       propertyPath: m_LocalPosition.z
@@ -597,7 +597,17 @@ Prefab:
     - target: {fileID: 61922545204487060, guid: a9ad9dccfd2e22e4884d0043e8219717,
         type: 2}
       propertyPath: m_Size.x
-      value: 1.38
+      value: 1.352414
+      objectReference: {fileID: 0}
+    - target: {fileID: 61922545204487060, guid: a9ad9dccfd2e22e4884d0043e8219717,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: 0.13275926
+      objectReference: {fileID: 0}
+    - target: {fileID: 61922545204487060, guid: a9ad9dccfd2e22e4884d0043e8219717,
+        type: 2}
+      propertyPath: m_Offset.y
+      value: 0.00000034769377
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a9ad9dccfd2e22e4884d0043e8219717, type: 2}
@@ -1601,15 +1611,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1282950950577574, guid: a9ad9dccfd2e22e4884d0043e8219717, type: 2}
+      propertyPath: m_Name
+      value: Plataforma (9)
+      objectReference: {fileID: 0}
     - target: {fileID: 114285745524343732, guid: a9ad9dccfd2e22e4884d0043e8219717,
         type: 2}
       propertyPath: player
       value: 
       objectReference: {fileID: 1319006910}
-    - target: {fileID: 1282950950577574, guid: a9ad9dccfd2e22e4884d0043e8219717, type: 2}
-      propertyPath: m_Name
-      value: Plataforma (9)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a9ad9dccfd2e22e4884d0043e8219717, type: 2}
   m_IsPrefabParent: 0
@@ -1835,6 +1845,21 @@ Prefab:
       propertyPath: jogador
       value: 
       objectReference: {fileID: 1319006909}
+    - target: {fileID: 114161965336573174, guid: ca19054cc38b9454a96d72951df93bd9,
+        type: 2}
+      propertyPath: movimentoCameraVertical
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114161965336573174, guid: ca19054cc38b9454a96d72951df93bd9,
+        type: 2}
+      propertyPath: valorLimiteAlto
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114161965336573174, guid: ca19054cc38b9454a96d72951df93bd9,
+        type: 2}
+      propertyPath: valorLimiteBaixo
+      value: 0.6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca19054cc38b9454a96d72951df93bd9, type: 2}
   m_IsPrefabParent: 0
@@ -3275,11 +3300,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 212336215802982492, guid: 6dcb9888985c43247bfe07cde1fbbb3f,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6dcb9888985c43247bfe07cde1fbbb3f, type: 2}
   m_IsPrefabParent: 0
@@ -3296,7 +3316,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4737058349377688, guid: 3a5a6cd3b86251b4e951a05f29b52957, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 10.6
+      value: 10.09
       objectReference: {fileID: 0}
     - target: {fileID: 4737058349377688, guid: 3a5a6cd3b86251b4e951a05f29b52957, type: 2}
       propertyPath: m_LocalPosition.z

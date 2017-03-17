@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MortTrigger : MonoBehaviour {
+public class MorteTrigger : MonoBehaviour {
 
 
 	public static bool JogadorSobreTrigger = false;

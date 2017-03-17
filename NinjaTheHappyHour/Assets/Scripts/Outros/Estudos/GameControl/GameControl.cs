@@ -15,7 +15,7 @@ public class GameControl : MonoBehaviour {
 
 
     void Awake () {
-
+		
 
         if ( control == null)// se a variavel control ainda não foi gravada então grave o objeto nela e o mantenha usando a função Dont Destroy On Load assim ongui se mantem
         {

@@ -154,8 +154,8 @@ Canvas:
   m_GameObject: {fileID: 71152393}
   m_Enabled: 1
   serializedVersion: 2
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 433691275}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -382,7 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0417b84882ea59945908028a5ca90616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneIndexToChangeScene: 2
+  SceneIndexToChangeScene: 1
   setScene: 1
   startTime: 6000
   conter: 0
