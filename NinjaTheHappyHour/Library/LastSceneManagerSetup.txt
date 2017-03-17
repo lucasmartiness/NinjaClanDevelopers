@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/EstudoPercistenciaDados.unity
+- path: Assets/Scenes/PrototipoBasico.unity
   isLoaded: 1
   isActive: 1
