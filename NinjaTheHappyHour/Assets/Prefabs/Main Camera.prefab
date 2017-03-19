@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 92558005593642464}
   - component: {fileID: 124091778526647566}
   - component: {fileID: 81874328335976394}
-  - component: {fileID: 114161965336573174}
+  - component: {fileID: 114823540129437174}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -92,7 +92,7 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1267748378992324}
   m_Enabled: 1
---- !u!114 &114161965336573174
+--- !u!114 &114823540129437174
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -104,6 +104,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jogador: {fileID: 0}
+  PosicaoJogadorNaCamera: {x: 0, y: 0}
+  componenteCamera: {fileID: 0}
+  movimentoCameraVertical: 8
+  valorLimiteBaixo: 0.8
+  valorLimiteAlto: 0.2
 --- !u!124 &124091778526647566
 Behaviour:
   m_ObjectHideFlags: 1

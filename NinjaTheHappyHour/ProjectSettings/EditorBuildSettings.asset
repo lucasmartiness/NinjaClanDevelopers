@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StartupLogos/Startup_LogoMarcas.unity
   - enabled: 1
-    path: Assets/Scenes/PrototipoBasico.unity
+    path: Assets/Scenes/PrototipoBasico2.unity

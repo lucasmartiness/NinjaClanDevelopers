@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/PrototipoBasico.unity
+- path: Assets/Scenes/PrototipoBasico2.unity
   isLoaded: 1
   isActive: 1

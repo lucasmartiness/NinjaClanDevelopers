@@ -18,7 +18,7 @@ public class Jogador : MonoBehaviour
     public float Tamanho = 3;// componente de tamanho altura e largura maxima
     //private int Estado;
     public int ForcaPulo;// Força de impulso do pulo
-
+	public bool sobreChao = false;
     // definição dos estados para maquinas de estado
     public enum estadoJogador{ Parado , Agachar, OlharCima ,Nascer, Correr,Morrer,Cair ,Pular, SubirEscada,Bater,Dash,Deslizar };
     enum ataqueJogador { SocoSimples, ChuteSimples, SocoComplexo, SocoCorrendo };
@@ -26,10 +26,11 @@ public class Jogador : MonoBehaviour
     public estadoJogador movimentoId;
     ataqueJogador ataqueId;
 	public Animator clip;
-	public bool bloquearMovimentoJogador = false;
-
+	public bool bloquearPuloVertival = false;
+	public Vector2 movimento;// = new Vector2(10,0);
     void Start()
     { 
+		movimento = new Vector2 (0, 0);
 		clip = GetComponentInChildren < Animator >();
         rb = GetComponent<Rigidbody2D>();
 
@@ -48,35 +49,41 @@ public class Jogador : MonoBehaviour
 
 
     // local para armazenar os estados para animações 
-    private void AtualizarEstado()
+    private void AtualizarEstado() // apenas animação
     {
 
 
-		if (!(rb.velocity.x == 0 && rb.velocity.y == 0)&& !bloquearMovimentoJogador)
+		// se a velocidade for -1 no eixo y vertical e o pulo não estiver bloqueado então caia
+		if (rb.velocity.y < -2  )
+		{
+			movimentoId = estadoJogador.Cair ;
+		}
+		// se não estiver parado mas sobre chão e pulo não bloqueado então corra
+		if (!(rb.velocity.x == 0)&&   sobreChao)
         {
             movimentoId = estadoJogador.Correr;
         }
 
         // se pulo
-		if (rb.velocity.y > 0 && !bloquearMovimentoJogador)
+		//se a velocidade horizontal for baixa e a vertical for entre 0 e 0.1 então fique parado
+		if ((rb.velocity.x > -0.1 && rb.velocity.x < 0.1 )&& ( rb.velocity.y > -1 && rb.velocity.y < 0.1) )
+		{
+			movimentoId = estadoJogador.Parado;
+
+		}// pule se a velocidade for positivo e não estiver bloqueado
+		if (rb.velocity.y > 1 )
         {
             movimentoId = estadoJogador.Pular;
         }
 
-		if (rb.velocity.y < 0 && !bloquearMovimentoJogador)
-        {
-            movimentoId = estadoJogador.Cair ;
-        }
 
-        // animar corrida
-		if ( (rb.velocity.x > -0.1 && rb.velocity.x < 0.1 )&& ( rb.velocity.y > -0.1 && rb.velocity.y < 0.1) )
-        {
-            movimentoId = estadoJogador.Parado;
-            
-        }
-		if (rb.velocity.y < 0 && bloquearMovimentoJogador) {
-			movimentoId = estadoJogador.Deslizar;
+
+		// se o pulo vertival for desativado então o jogador está na parede e seu pulo será diagonal conforme a função Receber imput
+		if (rb.velocity.y < 0 && bloquearPuloVertival) {
+			movimentoId = estadoJogador.Deslizar; // o jogador irá deslizar
+
 		}
+
 
     }
     private void ReceberInput()
@@ -85,12 +92,12 @@ public class Jogador : MonoBehaviour
         float MovimentoHorizontal = Input.GetAxis("Horizontal") * 10;
 
         // Configurar para indicar que o movimentoId será de correr
-		if (!bloquearMovimentoJogador) {
+		if (!bloquearPuloVertival) {// se o pulo for bloqueado então o jogador pode correr e executar pulo diagonal conforme else se não ele pode pular normalmente
 			Correr (MovimentoHorizontal);
 			Pular ();
 		}
 		else {
-			
+			Correr (MovimentoHorizontal);
 			PularDiagonal ();
 		}
 
@@ -104,14 +111,14 @@ public class Jogador : MonoBehaviour
     }
     public void Pular()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.Space) && movimentoId!=estadoJogador.Cair)
         {
             rb.AddForce(new Vector2(0, ForcaPulo), ForceMode2D.Impulse);
         }
     }
 	public void PularDiagonal(){
 
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.Space) && movimentoId!=estadoJogador.Cair)
 		{
 			if(!SeraEsquerda) rb.AddRelativeForce (new Vector2 (ForcaPulo, 1.5f * ForcaPulo), ForceMode2D.Impulse); // Pular na diagonal Oposta ao do muro a direita
 			else rb.AddRelativeForce (new Vector2 (-ForcaPulo, 2* ForcaPulo), ForceMode2D.Impulse); // Pular na diagonal oposta ao muro a esquerda
@@ -135,7 +142,9 @@ public class Jogador : MonoBehaviour
     {
         // função que controla a direção escalar do objeto"sentido"
         // e atribuir direção fora o principal né que e acionar formça enquanto a velocidade for limitada conforme Requisitos
-       
+		if (rb.velocity.y < 0) {
+			sobreChao = false;
+		}
         // mudar direção
         // se esquerda mas a figura estiver na direita
 
@@ -155,15 +164,18 @@ public class Jogador : MonoBehaviour
         }
 
         // movimentar
-        if(rb.velocity.x < Velocidade && rb.velocity.x > -Velocidade )// se entre -3 e 3 de velocidade então adicione a força
-			rb.AddForce(new Vector2(Horizontal * 10, 0));
-		//print (movimentoId);
+		if (rb.velocity.x < Velocidade && rb.velocity.x > -Velocidade) {
+			// se entre -3 e 3 de velocidade então adicione a força
+			//bloquearPuloVertival = false;
+			movimento.x = Horizontal * 2;
+			rb.AddForce (movimento);
+		}
     }
 
 
 
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
 
                 Debug.Log("colidio com o chão");

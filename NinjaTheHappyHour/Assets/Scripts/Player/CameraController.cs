@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour {
     public GameObject jogador;
     // Use this for initialization
 	public Vector2 PosicaoJogadorNaCamera;
-	public Camera componenteCamera;
+	Camera componenteCamera;
 
 	public float movimentoCameraVertical ; // quantidade de movimento que a camera irá multiplicar a sua propria posição 
 
