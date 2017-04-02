@@ -11,13 +11,13 @@ public class Jogador : MonoBehaviour
 	public SpriteController ctrSprite;
 
     // Use this for initialization
-    private Rigidbody2D rb;// componente Fisica
+   // private Rigidbody2D rb;// componente Fisica
     public GameObject sprite;// componente sprite
     public bool SeraEsquerda = false;// direita
-    public float Velocidade;// componente de Velocidade Maxima
+	public float Velocidade;// componente de Velocidade Maxima
     public float Tamanho = 3;// componente de tamanho altura e largura maxima
     //private int Estado;
-    public int ForcaPulo;// Força de impulso do pulo
+	public int ForcaPulo;// Força de impulso do pulo
 	public bool sobreChao = false;
     // definição dos estados para maquinas de estado
     public enum estadoJogador{ Parado , Agachar, OlharCima ,Nascer, Correr,Morrer,Cair ,Pular, SubirEscada,Bater,Dash,Deslizar };
@@ -27,12 +27,18 @@ public class Jogador : MonoBehaviour
     ataqueJogador ataqueId;
 	public Animator clip;
 	public bool bloquearPuloVertival = false;
+
+
 	public Vector2 movimento;// = new Vector2(10,0);
+
+	public int numPulo = 0;
+
+
     void Start()
     { 
 		movimento = new Vector2 (0, 0);
 		clip = GetComponentInChildren < Animator >();
-        rb = GetComponent<Rigidbody2D>();
+        
 
     }
 
@@ -40,9 +46,10 @@ public class Jogador : MonoBehaviour
     void Update()
     {
 
-		AtualizarEstado();
+
+
         ReceberInput();
-        
+		AtualizarEstado();
 		ctrSprite.executarAnimacaoJogador(movimentoId.ToString());
     }
 
@@ -51,11 +58,12 @@ public class Jogador : MonoBehaviour
     // local para armazenar os estados para animações 
     private void AtualizarEstado() // apenas animação
     {
-
+		Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
 		// se a velocidade for -1 no eixo y vertical e o pulo não estiver bloqueado então caia
 		if (rb.velocity.y < -2  )
 		{
+		//	bloquearPuloVertival = false;
 			movimentoId = estadoJogador.Cair ;
 		}
 		// se não estiver parado mas sobre chão e pulo não bloqueado então corra
@@ -71,9 +79,10 @@ public class Jogador : MonoBehaviour
 			movimentoId = estadoJogador.Parado;
 
 		}// pule se a velocidade for positivo e não estiver bloqueado
-		if (rb.velocity.y > 1 )
+		if (rb.velocity.y > 1 && numPulo != 0 )
         {
             movimentoId = estadoJogador.Pular;
+			//bloquearPuloVertival = false;
         }
 
 
@@ -99,27 +108,59 @@ public class Jogador : MonoBehaviour
 		else {
 			Correr (MovimentoHorizontal);
 			PularDiagonal ();
+			//bloquearPuloVertival = true;
+		}
+		if (Input.GetButtonDown( "Fire1" ) ) {
+			atack ("espadaSimples");
 		}
 
 
     }
 
 
-    void atack()
+	void atack(string tipo)
     {
+		// crie o objeto de ataque simples espada
+		if(tipo == "espadaSimples") atackEspada();
 
-    }
+	}
+	private void atackEspada()
+	{
+		
+		if (SeraEsquerda) {
+			//print ("atacar");
+			GameObject ataqueX = GameObject.Find ("Sistema");
+			GameObject ataque = ataqueX.GetComponent<ObjetoAtaque>().ataqueEspada;
+			ataque.transform.localScale = new Vector3 (-1, 1, 0);
+			Object.Instantiate (ataque, new Vector3 (transform.position.x - 1.3f, transform.position.y, 0), new Quaternion (0, 0, 0, 0));
+		}
+		else {
+			GameObject ataqueX = GameObject.Find ("Sistema");
+			GameObject ataque = ataqueX.GetComponent<ObjetoAtaque> ().ataqueEspada;
+			ataque.transform.localScale = new Vector3 (1, 1, 0);
+			Object.Instantiate (ataque, new Vector3 (transform.position.x + 1.3f, transform.position.y, 0), new Quaternion (0, 0, 0, 0));
+
+		}
+
+	}
     public void Pular()
     {
-		if (Input.GetKeyDown(KeyCode.Space) && movimentoId!=estadoJogador.Cair)
-        {
+		// se apetrado espaço então pule
+		if (Input.GetKeyDown(KeyCode.Space) && movimentoId!=estadoJogador.Cair && numPulo < 2)
+		{
+			Rigidbody2D rb = GetComponent<Rigidbody2D>();
+			movimentoId = estadoJogador.Pular;
+			numPulo++;
+			rb.velocity = new Vector2( rb.velocity.x, 0)  ;
             rb.AddForce(new Vector2(0, ForcaPulo), ForceMode2D.Impulse);
         }
     }
 	public void PularDiagonal(){
-
-		if (Input.GetKeyDown(KeyCode.Space) && movimentoId!=estadoJogador.Cair)
+		//;/numPulo++;
+		Rigidbody2D rb = GetComponent<Rigidbody2D>();
+		if (Input.GetKeyDown(KeyCode.Space) && movimentoId!=estadoJogador.Cair && numPulo < 2)
 		{
+			movimentoId = estadoJogador.Pular;
 			if(!SeraEsquerda) rb.AddRelativeForce (new Vector2 (ForcaPulo, 1.5f * ForcaPulo), ForceMode2D.Impulse); // Pular na diagonal Oposta ao do muro a direita
 			else rb.AddRelativeForce (new Vector2 (-ForcaPulo, 2* ForcaPulo), ForceMode2D.Impulse); // Pular na diagonal oposta ao muro a esquerda
 		}
@@ -140,6 +181,7 @@ public class Jogador : MonoBehaviour
     }
     public void Correr(float Horizontal)
     {
+		Rigidbody2D rb = GetComponent<Rigidbody2D>();
         // função que controla a direção escalar do objeto"sentido"
         // e atribuir direção fora o principal né que e acionar formça enquanto a velocidade for limitada conforme Requisitos
 		if (rb.velocity.y < 0) {
@@ -167,7 +209,7 @@ public class Jogador : MonoBehaviour
 		if (rb.velocity.x < Velocidade && rb.velocity.x > -Velocidade) {
 			// se entre -3 e 3 de velocidade então adicione a força
 			//bloquearPuloVertival = false;
-			movimento.x = Horizontal * 2;
+			movimento.x = Horizontal * 4;
 			rb.AddForce (movimento);
 		}
     }

@@ -13,23 +13,28 @@ public class ElementoCenario : MonoBehaviour {
 
 	void  OnCollisionEnter2D(Collision2D x){
 
+		if (Tipo == "Escada") {
+			player.movimentoId = Jogador.estadoJogador.Correr;
+		}
 
-		if (Tipo == "Chao") {
+		if (Tipo == "Chao" || Tipo == "Escada") {
 			if (x.transform.CompareTag("Player") ) {
 			//	print (Tipo);
 				Tipo = "Chao";
 				player.bloquearPuloVertival = false;
+				player.numPulo = 0;
 			}
 
 		}
 		if (Tipo == "Parede") {
-			if (x.transform.CompareTag("Player") ) {
+			if (x.transform.CompareTag ("Player")) {
 				//print (Tipo);
 				//Tipo = "Parede";
+				player.numPulo = 0;
 				player.bloquearPuloVertival = true;
 
 
-				if ((ParedeIsLeft && player.SeraEsquerda)|| ( !ParedeIsLeft && !player.SeraEsquerda )) {
+				if ((ParedeIsLeft && player.SeraEsquerda) || (!ParedeIsLeft && !player.SeraEsquerda)) {
 					player.SeraEsquerda = !player.SeraEsquerda;
 				
 					player.transform.localScale = new Vector2 (player.transform.localScale.x * -1, 1);
@@ -40,7 +45,7 @@ public class ElementoCenario : MonoBehaviour {
 					
 			}
 
-		}
+		} 
 
 			
 
@@ -48,12 +53,23 @@ public class ElementoCenario : MonoBehaviour {
 	void OnCollisionExit2D(Collision2D x){
 		if(x.transform.tag == "Parede")
 			player.bloquearPuloVertival = false;// bloqueia o pulo vertical para cima se o jogador estiver na parede
+
+		if (Tipo == "Escada") {
+			player.movimentoId = Jogador.estadoJogador.Correr;
+		}
+
 	}
 	void OnCollisionStay2D(Collision2D x){
 	
-		if (Tipo == "Chao" ) {
-			if (x.transform.CompareTag("Player") ) {
+
+		if (Tipo == "Escada") {
+			player.movimentoId = Jogador.estadoJogador.Correr;
+		}
+
+		if (Tipo == "Chao") {
+			if (x.transform.CompareTag ("Player")) {
 				//print (Tipo);
+				player.numPulo = 0;
 				Tipo = "Chao";
 				player.bloquearPuloVertival = false;
 				if (player.sobreChao == false) {
@@ -62,8 +78,7 @@ public class ElementoCenario : MonoBehaviour {
 
 			}
 
-		}
-
+		} 
 
 
 	}

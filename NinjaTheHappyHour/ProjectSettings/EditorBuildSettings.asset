@@ -7,5 +7,9 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 0
     path: Assets/Scenes/StartupLogos/Startup_LogoMarcas.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PrototipoBasico2.unity
+  - enabled: 0
+    path: Assets/Scenes/Vercao3dCena.unity
+  - enabled: 1
+    path: Assets/Scenes/PrototipoBasico3.unity

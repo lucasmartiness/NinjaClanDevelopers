@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class MorteTrigger : MonoBehaviour {
 
 
@@ -21,7 +21,8 @@ public class MorteTrigger : MonoBehaviour {
 			{
 			JogadorSobreTrigger = true;
 				print ("morte");
-	
+		//	SceneManager.UnloadSceneAsync ("Vercao3dCena");
+			//SceneManager.LoadScene ("Vercao3dCena");
 			}
 	}
 }
