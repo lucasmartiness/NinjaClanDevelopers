@@ -1,35 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[RequireComponent(typeof(SpriteController) ) ]
 public class Jogador : MonoBehaviour
 {
 
 
-   // public SpriteController.AnimadorDelegate animatorDelegatorPlayer;
 
 	public SpriteController ctrSprite;
 
-    // Use this for initialization
-   // private Rigidbody2D rb;// componente Fisica
     public GameObject sprite;// componente sprite
     public bool SeraEsquerda = false;// direita
 	public float Velocidade;// componente de Velocidade Maxima
     public float Tamanho = 3;// componente de tamanho altura e largura maxima
-    //private int Estado;
 	public int ForcaPulo;// Força de impulso do pulo
 	public bool sobreChao = false;
-    // definição dos estados para maquinas de estado
-    public enum estadoJogador{ Parado , Agachar, OlharCima ,Nascer, Correr,Morrer,Cair ,Pular, SubirEscada,Bater,Dash,Deslizar };
+	public enum estadoJogador{ Parado , Agachar, OlharCima ,Nascer, Correr,Morrer,Cair ,Pular, SubirEscada,Bater,Dash,Deslizar }; // definição dos estados para maquinas de estado
     enum ataqueJogador { SocoSimples, ChuteSimples, SocoComplexo, SocoCorrendo };
     // variaveis que armazenam o estado
     public estadoJogador movimentoId;
     ataqueJogador ataqueId;
 	public Animator clip;
 	public bool bloquearPuloVertival = false;
-
-
-	public Vector2 movimento;// = new Vector2(10,0);
+	public Vector2 movimento;
 
 	public int numPulo = 0;
 
@@ -50,6 +43,7 @@ public class Jogador : MonoBehaviour
 
         ReceberInput();
 		AtualizarEstado();
+		//ctrSprite = GetComponent<SpriteController>()
 		ctrSprite.executarAnimacaoJogador(movimentoId.ToString());
     }
 
@@ -95,6 +89,8 @@ public class Jogador : MonoBehaviour
 
 
     }
+
+
     private void ReceberInput()
     {
         // captura os botões A e D seta esquerda e direita e joystick (horizontal) do controle
@@ -118,7 +114,7 @@ public class Jogador : MonoBehaviour
     }
 
 
-	void atack(string tipo)
+	public void atack(string tipo)
     {
 		// crie o objeto de ataque simples espada
 		if(tipo == "espadaSimples") atackEspada();
@@ -175,13 +171,28 @@ public class Jogador : MonoBehaviour
 
     }
 
-    public void deslizarNaParede()
-    {
 
-    }
-    public void Correr(float Horizontal)
+	private void MudarDirecao(Rigidbody2D rb){
+		if (SeraEsquerda && rb.velocity.x >= 0.1f )// valores positivos são direita ou seja o personagem está indo para a direita
+		{
+			SeraEsquerda = !SeraEsquerda;// mudar da esquerda para direita
+			sprite.transform.localScale = new Vector2(transform.localScale.x * Tamanho, transform.localScale.y * Tamanho);
+
+		}
+		// se direita mas a figura estiver na esquerda
+		if (!SeraEsquerda && rb.velocity.x <= -0.1f)
+		{
+			SeraEsquerda = !SeraEsquerda;// mudar da direita para esquerda
+
+			sprite.transform.localScale = new Vector2(-transform.localScale.x * Tamanho, transform.localScale.y * Tamanho);
+
+		}
+	}
+	public void Correr(float Horizontal)
     {
+		
 		Rigidbody2D rb = GetComponent<Rigidbody2D>();
+		movimento.y = rb.velocity.y;
         // função que controla a direção escalar do objeto"sentido"
         // e atribuir direção fora o principal né que e acionar formça enquanto a velocidade for limitada conforme Requisitos
 		if (rb.velocity.y < 0) {
@@ -189,27 +200,19 @@ public class Jogador : MonoBehaviour
 		}
         // mudar direção
         // se esquerda mas a figura estiver na direita
+		MudarDirecao(rb);
 
-        if (SeraEsquerda && rb.velocity.x >= 0.1f )// valores positivos são direita ou seja o personagem está indo para a direita
-        {
-            SeraEsquerda = !SeraEsquerda;// mudar da esquerda para direita
-            sprite.transform.localScale = new Vector2(transform.localScale.x * Tamanho, transform.localScale.y * Tamanho);
-               
-        }
-        // se direita mas a figura estiver na esquerda
-        if (!SeraEsquerda && rb.velocity.x <= -0.1f)
-        {
-            SeraEsquerda = !SeraEsquerda;// mudar da direita para esquerda
-            
-            sprite.transform.localScale = new Vector2(-transform.localScale.x * Tamanho, transform.localScale.y * Tamanho);
 
-        }
 
-        // movimentar
-		if (rb.velocity.x < Velocidade && rb.velocity.x > -Velocidade) {
+
+
+
+
+		 if (rb.velocity.x < Velocidade && rb.velocity.x > -Velocidade) {
 			// se entre -3 e 3 de velocidade então adicione a força
 			//bloquearPuloVertival = false;
-			movimento.x = Horizontal * 4;
+			movimento.x = Horizontal * 2;
+			//movimento = Vector3.ClampMagnitude (movimento, 10);
 			rb.AddForce (movimento);
 		}
     }
