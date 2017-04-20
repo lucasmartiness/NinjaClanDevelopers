@@ -11,6 +11,13 @@ public class ElementoCenario : MonoBehaviour {
 
 
 
+	void Start(){
+
+		if (player == null) {
+			player = GameObject.FindGameObjectWithTag ("Player").GetComponent<Jogador>();
+		}
+	}
+
 	void  OnCollisionEnter2D(Collision2D x){
 
 		if (Tipo == "Escada") {
@@ -69,7 +76,7 @@ public class ElementoCenario : MonoBehaviour {
 		if (Tipo == "Chao") {
 			if (x.transform.CompareTag ("Player")) {
 				//print (Tipo);
-				player.numPulo = 0;
+				player.numPulo = 0; 	
 				Tipo = "Chao";
 				player.bloquearPuloVertival = false;
 				if (player.sobreChao == false) {

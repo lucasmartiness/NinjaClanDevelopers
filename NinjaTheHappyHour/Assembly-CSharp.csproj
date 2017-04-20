@@ -46,14 +46,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\DadosInimigo.cs" />
      <Compile Include="Assets\EmptyInterface.cs" />
      <Compile Include="Assets\Instanciador.cs" />
-     <Compile Include="Assets\Scripts\Ataque\DanoEspada.cs" />
-     <Compile Include="Assets\Scripts\Ataque\ObjetoAtaque.cs" />
+     <Compile Include="Assets\Scripts\Ataque\Ataques.cs" />
+     <Compile Include="Assets\Scripts\Ataque\DanoGeral.cs" />
+     <Compile Include="Assets\Scripts\Ataque\ObjetosInstanciaveis.cs" />
      <Compile Include="Assets\Scripts\Cenario\ElementoCenario.cs" />
      <Compile Include="Assets\Scripts\Cenario\MorteTrigger.cs" />
+     <Compile Include="Assets\Scripts\Constantes.cs" />
+     <Compile Include="Assets\Scripts\Interface\ControladoraInterface.cs" />
      <Compile Include="Assets\Scripts\Interface\CoracaoUI.cs" />
-     <Compile Include="Assets\Scripts\InterfaceVisualGamePlay.cs" />
      <Compile Include="Assets\Scripts\Menu\BotaoFecharApp.cs" />
      <Compile Include="Assets\Scripts\Menu\LogosForCanvas.cs" />
      <Compile Include="Assets\Scripts\Menu\Menu.cs" />
@@ -68,9 +71,12 @@
      <Compile Include="Assets\Scripts\Outros\SetPlayName.cs" />
      <Compile Include="Assets\Scripts\Outros\Steamworks.NET\SteamManager.cs" />
      <Compile Include="Assets\Scripts\Player\CameraController.cs" />
+     <Compile Include="Assets\Scripts\Player\DadosJogador.cs" />
      <Compile Include="Assets\Scripts\Player\Jogador.cs" />
+     <Compile Include="Assets\Scripts\Player\MovimentoSimples.cs" />
+     <Compile Include="Assets\Scripts\Player\Personagem.cs" />
+     <Compile Include="Assets\Scripts\Player\RegrasJogador.cs" />
      <Compile Include="Assets\Scripts\Player\SpriteController.cs" />
-     <Compile Include="Assets\Scripts\curiosidade.cs" />
      <None Include="Assets\Fonts\Read me.txt" />
      <None Include="Assets\Plugins\Steamworks.NET\redist\steam_appid.txt" />
  <Reference Include="UnityEngine.UI">

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjetoAtaque : MonoBehaviour {
+public class ObjetosInstanciaveis : MonoBehaviour {
 
 	public GameObject ataqueEspada ;
 

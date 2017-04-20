@@ -7,7 +7,7 @@ public class SpriteController : MonoBehaviour {
 
 
 
-	public Jogador player;
+	//public Jogador player;
     public Animator clip;
 	// Use this for initialization
 	void Start () {
@@ -31,7 +31,7 @@ public class SpriteController : MonoBehaviour {
 			clip.SetBool ("Deslizar", false);
 		}
 
-        if(executarFuncoes == "Parado")
+		else if(executarFuncoes == "Parado")
         {
             //print("parado");
 			clip.SetBool("Idle",true);
@@ -40,7 +40,7 @@ public class SpriteController : MonoBehaviour {
 			clip.SetBool ("Cair", false);
 			clip.SetBool ("Deslizar", false);
         }
-		if (executarFuncoes == "Deslizar") {
+		else if (executarFuncoes == "Deslizar") {
 			clip.SetBool("Running", false);
 			clip.SetBool("Idle",false);
 			clip.SetBool("Running", false);
@@ -49,18 +49,20 @@ public class SpriteController : MonoBehaviour {
 			clip.SetBool ("Deslizar", true);
 
 		}
-		if (executarFuncoes == "Cair") {
+		else if (executarFuncoes == "Cair") {
 			clip.SetBool("Running", false);
 			clip.SetBool("Idle",false);
 			clip.SetBool("Jump", false);
 			clip.SetBool ("Cair", true);
 			clip.SetBool ("Deslizar", false);
 		}
-		if (executarFuncoes == "Pular") {
-			clip.SetBool("Running", false);
-			clip.SetBool("Jump", true);
-			clip.SetBool("Idle",false);
+		else if (executarFuncoes == "Pular") {
+			clip.SetBool ("Running", false);
+			clip.SetBool ("Jump", true);
+			clip.SetBool ("Idle", false);
 			clip.SetBool ("Deslizar", false);
+		} else {
+			Debug.Log ("erro na animação possivelmente o nome foi digitado errado: "+executarFuncoes);
 		}
         
     }

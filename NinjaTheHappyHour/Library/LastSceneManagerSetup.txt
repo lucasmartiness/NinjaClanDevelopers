@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Menu/Creditos.unity
+- path: Assets/Scenes/PrototipoBasico3.unity
   isLoaded: 1
   isActive: 1

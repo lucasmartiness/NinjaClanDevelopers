@@ -126,13 +126,13 @@ public class Jogador : MonoBehaviour
 		if (SeraEsquerda) {
 			//print ("atacar");
 			GameObject ataqueX = GameObject.Find ("Sistema");
-			GameObject ataque = ataqueX.GetComponent<ObjetoAtaque>().ataqueEspada;
+			GameObject ataque = ataqueX.GetComponent<ObjetosInstanciaveis>().ataqueEspada;
 			ataque.transform.localScale = new Vector3 (-1, 1, 0);
 			Object.Instantiate (ataque, new Vector3 (transform.position.x - 1.3f, transform.position.y, 0), new Quaternion (0, 0, 0, 0));
 		}
 		else {
 			GameObject ataqueX = GameObject.Find ("Sistema");
-			GameObject ataque = ataqueX.GetComponent<ObjetoAtaque> ().ataqueEspada;
+			GameObject ataque = ataqueX.GetComponent<ObjetosInstanciaveis> ().ataqueEspada;
 			ataque.transform.localScale = new Vector3 (1, 1, 0);
 			Object.Instantiate (ataque, new Vector3 (transform.position.x + 1.3f, transform.position.y, 0), new Quaternion (0, 0, 0, 0));
 

@@ -24,6 +24,9 @@ public class CameraController : MonoBehaviour {
 	void Update () {
 
 		// copie a posição no eixo x do jogador aqui fora e dentro configura a posição y
+		if(jogador == null)
+			jogador = GameObject.FindGameObjectWithTag("Player");
+		
 		SeguirJogador(jogador.transform.position.x,transform.position.y,transform.position.z);
 
 	}

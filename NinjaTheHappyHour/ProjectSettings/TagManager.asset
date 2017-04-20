@@ -7,6 +7,11 @@ TagManager:
   - Chao
   - Parede
   - Morte
+  - Canvas
+  - ParedeEsquerda
+  - ParedeDireita
+  - Tiro
+  - Inimigo
   layers:
   - Default
   - TransparentFX

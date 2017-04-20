@@ -21,9 +21,5 @@ public class Menu : MonoBehaviour {
 	public void AbrirJanela(GameObject janela){
 		GameObject.Instantiate(janela);
 
-
-
-	//	GJanela.SetActive (true);
-
 	}
 }
