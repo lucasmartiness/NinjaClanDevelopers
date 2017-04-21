@@ -15,6 +15,8 @@ public class MovimentoSimples : MonoBehaviour {
 	public int numeroPulos = 0;// public for debug conter
 	public bool escoradoNaParede = false;// public for debug
 	public string direcaoParede = "direita";
+	public bool dentroDaEscada;
+	public bool sobreChao;
 
 	public void MovimentoVertical(float direcao,float speed){
 		// pega o movimento multiplica pela velocidade e pelo delta time e transforma em diração global para movimentar
@@ -25,7 +27,7 @@ public class MovimentoSimples : MonoBehaviour {
 		movement *= Time.deltaTime;
 		movement = transform.TransformDirection(movement);
 		transform.Translate (movement);
-
+		//dentroDaEscada = false;
 		// animar sprite
 		//SpriteController _spriteController = GameObject.FindGameObjectWithTag ("Player").GetComponentInChildren<SpriteController> ();
 
@@ -39,7 +41,8 @@ public class MovimentoSimples : MonoBehaviour {
 		movement *= Time.deltaTime;
 		movement = transform.TransformDirection(movement);
 		transform.Translate (movement);
-
+		Rigidbody2D rb = GetComponent<Rigidbody2D> ();
+	
 		// animar sprite
 		//SpriteController _spriteController = GameObject.FindGameObjectWithTag ("Player").GetComponentInChildren<SpriteController> ();
 	
@@ -63,12 +66,18 @@ public class MovimentoSimples : MonoBehaviour {
 		Vector3 movimentoPulo = transform.TransformDirection (forcaNivel);
 
 		Rigidbody2D fisica = GameObject.FindGameObjectWithTag ("Player").GetComponent<Rigidbody2D> ();
+		fisica.velocity = new Vector2 (fisica.velocity.x, 0);
 		fisica.AddRelativeForce (movimentoPulo, ForceMode2D.Impulse);
 		//GetComponent<Rigidbody2D> ().AddForce (movimentoPulo,ForceMode2D.Impulse);
 		numeroPulos++;
 	}
 
-
+	void OnCollisionStay2D(Collision2D cl){
+		if(cl.gameObject.CompareTag("Chao") ) {
+			direcaoParede = "";
+			sobreChao = true;
+		}
+	}
 	void OnCollisionEnter2D(Collision2D cl){
 		// se jogador sobre chão zerar pulo
 		if(cl.gameObject.CompareTag("Chao") ) {
@@ -84,17 +93,17 @@ public class MovimentoSimples : MonoBehaviour {
 
 
 		}
-		if (cl.gameObject.CompareTag ("Parede")) {
+		if (cl.gameObject.CompareTag ("Parede") && sobreChao == false) {
 			escoradoNaParede = true;
 		}
-		if (cl.gameObject.CompareTag ("ParedeEsquerda")) {
+		if (cl.gameObject.CompareTag ("ParedeEsquerda") && sobreChao == false) {
 			escoradoNaParede = true;
 			direcaoParede = "esquerda";
 			AtivarGravidade (false);
 			InvertDirecao ();
 
 		}
-		if (cl.gameObject.CompareTag ("ParedeDireita")) {
+		if (cl.gameObject.CompareTag ("ParedeDireita") && sobreChao == false) {
 			escoradoNaParede = true;
 			direcaoParede = "direita";
 			AtivarGravidade (false);
@@ -104,18 +113,21 @@ public class MovimentoSimples : MonoBehaviour {
 
 	void OnCollisionExit2D(Collision2D cl){
 
-
+		if(cl.gameObject.CompareTag("Chao") ){
+			sobreChao = false;
+		}
 		if (// se descolidir com uma parede escalavel "direita ou esquerda" então ativar gravidade false
 
 			cl.gameObject.CompareTag ("ParedeDireita") || 
 			cl.gameObject.CompareTag ("ParedeEsquerda") ||
-			cl.gameObject.CompareTag ("Parede") )
+			cl.gameObject.CompareTag ("Parede")  ) 
 		{
 
 			if (gameObject.CompareTag ("Player")) {
 				AtivarGravidade (true);
 			}
-			InvertDirecao ();
+			if(!sobreChao)
+		   		 InvertDirecao ();
 			escoradoNaParede = false;
 			//direcaoParede = "";
 		}
@@ -140,7 +152,7 @@ public class MovimentoSimples : MonoBehaviour {
 	}
 	// get set
 	public void setEscoradoParede(bool escoradoParede) {
-		escoradoParede = escoradoParede;
+		this.escoradoNaParede = escoradoParede;
 	}
 	public bool getEscoradoParede(){
 		return escoradoNaParede;
@@ -160,6 +172,7 @@ public class MovimentoSimples : MonoBehaviour {
 		Vector3 movimentoPulo = transform.TransformDirection (forcaNivel);
 
 		Rigidbody2D fisica = GameObject.FindGameObjectWithTag ("Player").GetComponent<Rigidbody2D> ();
+		fisica.velocity = new Vector2 (0, fisica.velocity.y);
 		fisica.AddForce (movimentoPulo, ForceMode2D.Impulse);
 		//GetComponent<Rigidbody2D> ().AddForce (movimentoPulo,ForceMode2D.Impulse);
 		numeroPulos++;
@@ -183,6 +196,12 @@ public class MovimentoSimples : MonoBehaviour {
 	}
 	public string getDirecao(){
 		return direcao;
+	}
+	public void setSobreChao(bool sobreChao){
+		this.sobreChao = sobreChao;
+	}
+	public bool getSobreChao(){
+		return sobreChao;
 	}
 
 }

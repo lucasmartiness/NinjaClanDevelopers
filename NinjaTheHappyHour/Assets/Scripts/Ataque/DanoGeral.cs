@@ -60,6 +60,7 @@ public class DanoGeral : MonoBehaviour
 				dj.dadosJogador.levarDano (dano);
 				Destroy (gameObject);
 			}
+			//if(cl.gameObject.layer
 		}
 		if (nome == "AtaqueEspadaSimples") {
 			//Debug.Log ("ataque do jogador no inimigo " + cl.gameObject.name);

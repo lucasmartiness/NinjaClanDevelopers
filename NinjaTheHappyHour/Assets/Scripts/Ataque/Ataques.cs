@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent ( typeof(ObjetosInstanciaveis ) ) ]
 public class Ataques : MonoBehaviour {
-
+	// CLASSE QUE GERA UM ITEM QUE TEM COMO COMPONENTE DANO GERAL
 	// LISTA DE ATAQUES
 	public GameObject ataqueEspada ;
 	public GameObject tiroTorreta;
@@ -11,8 +11,13 @@ public class Ataques : MonoBehaviour {
 	public bool maquinaAutoExecutora = false;
 	public string tipoArma;
 	public Vector3 posicaoArma;
-
+	public bool isLeft;
 	float timer = 0;
+
+	// maquina estado ataque
+	public string acaoAtaque;
+
+
 	void Update(){
 
 		if (maquinaAutoExecutora) {
@@ -20,12 +25,13 @@ public class Ataques : MonoBehaviour {
 
 
 				if (timer < 3) {
-
+					acaoAtaque = "carregandoArma";
 					timer += Time.deltaTime;
 					}
 			}
 				if(timer >= 3 ) {
-					AtaqueTiroTorreta (posicaoArma, false);
+					acaoAtaque = "atirando";
+					AtaqueTiroTorreta (posicaoArma, isLeft);
 					timer = 0;
 				}
 

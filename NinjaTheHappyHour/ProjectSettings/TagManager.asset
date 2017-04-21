@@ -12,6 +12,7 @@ TagManager:
   - ParedeDireita
   - Tiro
   - Inimigo
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -54,4 +55,7 @@ TagManager:
     locked: 0
   - name: Inferior
     uniqueID: 1708202125
+    locked: 0
+  - name: Cenario
+    uniqueID: 1256998087
     locked: 0

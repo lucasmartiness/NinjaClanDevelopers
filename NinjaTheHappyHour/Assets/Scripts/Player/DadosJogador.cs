@@ -1,32 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent( typeof(Constantes))]
 
 
 public class DadosJogador : MonoBehaviour {
 
+	public int LimiteVida ;
 	// classe de dados como vida ou dano
 	[System.Serializable]
 	public class DadosJogadorMemoria{
 
-		public int vida = 10;// for debug public
+		public int vida ;// for debug public
 		public int dano;// public for debug
 		public string acao1;// public for debug only
 		public string tipoMovimento; // public for debug // este especifica se o jogador vai usar movimentos simples como andar pular no chão ou movimentos parede
 
-		public DadosJogadorMemoria(){
-			vida = 0;
-			dano = 0;
-			tipoMovimento = "MovimentoSimples";
-		}
+	
 		public void levarDano(int Dano){
 			vida -= Dano;
 		}
+		public void adicionarVida(int Vida){
+			vida += Vida;
+		}
 		public void setVida(int vida){
-
-			Constantes cs = GameObject.Find ("Sistema").GetComponent<Constantes> ();
-			Mathf.Clamp (vida, 0, cs.LimiteVida);
 
 			this.vida = vida;
 		}
@@ -51,8 +47,9 @@ public class DadosJogador : MonoBehaviour {
 				this.acao1 = acao;
 			} else if (acao == "Caindo") {
 				this.acao1 = acao;
-			}
-			else if (acao == "Parado") {
+			} else if (acao == "Parado") {
+				this.acao1 = acao;
+			} else if (acao == "Agachado" || acao == "Agaixado" || acao == "Agaichado") {
 				this.acao1 = acao;
 			}
 
@@ -65,12 +62,12 @@ public class DadosJogador : MonoBehaviour {
 
 
 	void Start () {
-		dadosJogador = new DadosJogadorMemoria ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+	//	Constantes cs = GameObject.Find ("Sistema").GetComponent<Constantes> ();
+		dadosJogador.vida = Mathf.Clamp (dadosJogador.vida, 0, LimiteVida);
 	}
 
 

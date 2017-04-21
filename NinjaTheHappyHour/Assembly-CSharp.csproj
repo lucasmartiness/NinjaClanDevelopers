@@ -53,10 +53,12 @@
      <Compile Include="Assets\Scripts\Ataque\DanoGeral.cs" />
      <Compile Include="Assets\Scripts\Ataque\ObjetosInstanciaveis.cs" />
      <Compile Include="Assets\Scripts\Cenario\ElementoCenario.cs" />
+     <Compile Include="Assets\Scripts\Cenario\Escada.cs" />
      <Compile Include="Assets\Scripts\Cenario\MorteTrigger.cs" />
      <Compile Include="Assets\Scripts\Constantes.cs" />
      <Compile Include="Assets\Scripts\Interface\ControladoraInterface.cs" />
      <Compile Include="Assets\Scripts\Interface\CoracaoUI.cs" />
+     <Compile Include="Assets\Scripts\Item\ItemGeral.cs" />
      <Compile Include="Assets\Scripts\Menu\BotaoFecharApp.cs" />
      <Compile Include="Assets\Scripts\Menu\LogosForCanvas.cs" />
      <Compile Include="Assets\Scripts\Menu\Menu.cs" />

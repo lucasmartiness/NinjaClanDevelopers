@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nome: AtaqueEspadaSimples
-  dano: 5
+  dano: 1
 --- !u!212 &212929112150823180
 SpriteRenderer:
   m_ObjectHideFlags: 1
