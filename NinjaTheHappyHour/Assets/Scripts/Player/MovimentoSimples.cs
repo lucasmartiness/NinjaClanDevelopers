@@ -177,6 +177,16 @@ public class MovimentoSimples : MonoBehaviour {
 		//GetComponent<Rigidbody2D> ().AddForce (movimentoPulo,ForceMode2D.Impulse);
 		numeroPulos++;
 	}
+	public void agachar(){
+		CapsuleCollider2D cp = GetComponent<CapsuleCollider2D> ();
+		cp.size = new Vector2 (cp.size.x, 1.84f/2);
+
+	}
+	public void levantar(){
+		CapsuleCollider2D cp = GetComponent<CapsuleCollider2D> ();
+		cp.size = new Vector2 (cp.size.x,1.84f);
+
+	}
 	public void atacar(string nomeAtaque){
 		
 	}

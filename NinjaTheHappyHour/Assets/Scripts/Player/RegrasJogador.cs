@@ -151,14 +151,12 @@ public class RegrasJogador : MonoBehaviour {
 			}
 			// ****************** SE O JOGADOR SE AGAIXAR ************************/
 			if (Input.GetKeyDown(KeyCode.LeftControl)) {
-				CapsuleCollider2D cp = _movimentoJogador.GetComponent<CapsuleCollider2D> ();
-				cp.size = new Vector2 (cp.size.x, cp.size.y / 2);
+				_movimentoJogador.agachar ();
 				_dadosJogador.dadosJogador.acao1 = "Agachado";
 			}
 			// ****************** SE O JOGADOR SE LEVANTAR ************************/
 			if ( Input.GetKeyUp(KeyCode.LeftControl)  ) {
-				CapsuleCollider2D cp = _movimentoJogador.GetComponent<CapsuleCollider2D> ();
-				cp.size =  new Vector2 (cp.size.x, cp.size.y * 2);
+				_movimentoJogador.levantar ();
 				_dadosJogador.dadosJogador.acao1 = "Parado";
 			}
 		} 
