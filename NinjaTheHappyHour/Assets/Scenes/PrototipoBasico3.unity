@@ -2799,6 +2799,11 @@ Prefab:
       propertyPath: m_UsedByEffector
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 61922545204487060, guid: a9ad9dccfd2e22e4884d0043e8219717,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a9ad9dccfd2e22e4884d0043e8219717, type: 2}
   m_IsPrefabParent: 0
@@ -4034,15 +4039,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4799643995525268, guid: 8e052387c9fa2f44e9f1f88e0524543f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.69
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4799643995525268, guid: 8e052387c9fa2f44e9f1f88e0524543f, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.73
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4799643995525268, guid: 8e052387c9fa2f44e9f1f88e0524543f, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.29540515
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4799643995525268, guid: 8e052387c9fa2f44e9f1f88e0524543f, type: 2}
       propertyPath: m_LocalRotation.x
@@ -5158,6 +5163,25 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a9ad9dccfd2e22e4884d0043e8219717, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &2021848178 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1282950950577574, guid: a9ad9dccfd2e22e4884d0043e8219717,
+    type: 2}
+  m_PrefabInternal: {fileID: 1143449419}
+--- !u!61 &2021848179
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2021848178}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.054839306, y: -0.02458401}
+  serializedVersion: 2
+  m_Size: {x: 1.320319, y: 0.18083386}
 --- !u!4 &2033208942 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4737058349377688, guid: 3a5a6cd3b86251b4e951a05f29b52957,

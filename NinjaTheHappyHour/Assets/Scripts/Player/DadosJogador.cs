@@ -49,7 +49,7 @@ public class DadosJogador : MonoBehaviour {
 				this.acao1 = acao;
 			} else if (acao == "Parado") {
 				this.acao1 = acao;
-			} else if (acao == "Agachado" || acao == "Agaixado" || acao == "Agaichado") {
+			} else if (acao == "Agachado") {
 				this.acao1 = acao;
 			}
 
