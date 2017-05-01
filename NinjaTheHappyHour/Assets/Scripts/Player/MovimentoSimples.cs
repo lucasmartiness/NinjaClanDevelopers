@@ -78,6 +78,7 @@ public class MovimentoSimples : MonoBehaviour {
 			sobreChao = true;
 		}
 	}
+
 	void OnCollisionEnter2D(Collision2D cl){
 		// se jogador sobre chão zerar pulo
 		if(cl.gameObject.CompareTag("Chao") ) {

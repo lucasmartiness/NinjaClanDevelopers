@@ -49,7 +49,7 @@ public class DadosInimigo : MonoBehaviour {
 			
 
 
-		if (vida == 0)
+		if (vida <= 0)
 			Destroy (gameObject);
 	}
 	public void levarDano(int dano){

@@ -13,6 +13,7 @@ TagManager:
   - Tiro
   - Inimigo
   - Item
+  - Ataque
   layers:
   - Default
   - TransparentFX

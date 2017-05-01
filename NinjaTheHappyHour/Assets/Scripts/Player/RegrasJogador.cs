@@ -127,6 +127,8 @@ public class RegrasJogador : MonoBehaviour {
 
 	void CapturarInput(){
 
+		//***************** SE FOR EXECUTADO O DASH **********************/
+
 		// captura movimento e pulo
 		// ****** SE MODO DE ESTADO FOR PARA MOVIMENTO SIMPLES ENTÃO CAPTURE TECLAS PARA MOVIMENTO SIMPLES *************/
 		if (_dadosJogador.dadosJogador.getTipoMovimento () == "MovimentoSimples" &&
@@ -141,14 +143,13 @@ public class RegrasJogador : MonoBehaviour {
 					_movimentoJogador.Pulo (Vector3.up, _movimentoJogador.jump);
 
 			}
-
-			//***************** SE FOR EXECUTADO O DASH **********************/
 			if (Input.GetKeyUp (KeyCode.LeftShift)) {
 				if(_movimentoJogador.getDirecao() == "esquerda")
 					_movimentoJogador.dash (Vector3.left,350);
 				if(_movimentoJogador.getDirecao() == "direita" ) 
 					_movimentoJogador.dash (Vector3.right,350);
 			}
+
 			// ****************** SE O JOGADOR SE AGAIXAR ************************/
 			if (Input.GetKeyDown(KeyCode.LeftControl)) {
 				_movimentoJogador.agachar ();
@@ -211,11 +212,11 @@ public class RegrasJogador : MonoBehaviour {
 
 			// se esquerda aponte o ataque a esquerda
 			if (_movimentoJogador.getDirecao() == "esquerda") {
-				GameObject.FindGameObjectWithTag ("Player").GetComponent<Ataques> ().AtaqueSabre (_movimentoJogador.transform.position + new Vector3(-2,0,0), true);
+				GameObject.FindGameObjectWithTag ("Player").GetComponent<Ataques> ().AtaqueSabre (_movimentoJogador.transform.position + new Vector3(-2,0,0), true,"AtaqueEspadaSimples");
 			}
 			// se direita aponte o atque a direita
 			else{
-				GameObject.FindGameObjectWithTag("Player").GetComponent<Ataques>().AtaqueSabre(_movimentoJogador.transform.position + new Vector3(2,0,0),false);
+				GameObject.FindGameObjectWithTag("Player").GetComponent<Ataques>().AtaqueSabre(_movimentoJogador.transform.position + new Vector3(2,0,0),false,"AtaqueEspadaSimples");
 				Debug.Log ("fire");
 			}
 		}

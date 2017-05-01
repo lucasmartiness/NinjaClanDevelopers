@@ -67,8 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc168d7590b34b43901e546684d970b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoracaoIntegro: {fileID: 21300000, guid: 9bfc02c29101cab46bae107eb131dd3a, type: 3}
-  CoracaoDanificado: {fileID: 21300000, guid: 896e51b0e9f91ec4aaee3ad6b360d561, type: 3}
+  CoracaoIntegro: {fileID: 21300000, guid: 4a158761e420e5940b202c370dfa1046, type: 3}
+  CoracaoDanificado: {fileID: 21300000, guid: b74edec67a91455439a7b3c4e02a9854, type: 3}
   CoracaoVisualizado: {fileID: 0}
   acao: 0
 --- !u!222 &222329229216712738

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent ( typeof(ObjetosInstanciaveis ) ) ]
+
 public class Ataques : MonoBehaviour {
 	// CLASSE QUE GERA UM ITEM QUE TEM COMO COMPONENTE DANO GERAL
 	// LISTA DE ATAQUES
@@ -10,7 +10,7 @@ public class Ataques : MonoBehaviour {
 	public float forcaTiro;
 	public bool maquinaAutoExecutora = false;
 	public string tipoArma;
-	public Vector3 posicaoArma;
+	public Vector3 posicaoTiro;
 	public bool isLeft;
 	float timer = 0;
 
@@ -31,7 +31,7 @@ public class Ataques : MonoBehaviour {
 			}
 				if(timer >= 3 ) {
 					acaoAtaque = "atirando";
-					AtaqueTiroTorreta (posicaoArma, isLeft);
+					AtaqueTiroTorreta (posicaoTiro, isLeft);
 					timer = 0;
 				}
 
@@ -39,11 +39,11 @@ public class Ataques : MonoBehaviour {
 				
 		}
 	}
-	public void AtaqueSabre(Vector3 position,bool isLeft){
+	public void AtaqueSabre(Vector3 position,bool isLeft,string nomeAtaque){
 
 
 		GameObject espada = Instantiate (ataqueEspada,position,new Quaternion());
-		espada.name = "ataqueEspada";
+		espada.name = nomeAtaque;
 		if (isLeft) {
 			Vector3 scaleTmp = espada.transform.localScale;
 			scaleTmp.x *= -1;
@@ -53,11 +53,20 @@ public class Ataques : MonoBehaviour {
 	public void AtaqueTiroTorreta(Vector3 position,bool isLeft){
 
 
-			GameObject tiro = GameObject.Instantiate (tiroTorreta, position, new Quaternion (0, 0, 0, 0));
+		GameObject tiro = Instantiate (tiroTorreta, transform.position+position, new Quaternion (0, 0, 0, 0));
 			tiro.name = "ataqueTiroTorreta";
+
 			Rigidbody2D rb = tiro.GetComponent<Rigidbody2D> ();
-			rb.AddForce (new Vector2 (forcaTiro, 0));
-			if (isLeft) {
+			
+
+			rb.AddForce (new Vector2 (forcaTiro, 0) );
+	
+
+			
+			DanoGeral dg = tiro.GetComponent<DanoGeral> ();
+			dg.isLeft = isLeft;
+
+		if (isLeft) {
 				Vector3 scaleTmp = tiro.transform.localScale;
 				scaleTmp.x *= -1;
 				tiro.transform.localScale = scaleTmp;
