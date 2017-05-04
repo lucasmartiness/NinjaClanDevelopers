@@ -160,6 +160,9 @@ public class RegrasJogador : MonoBehaviour {
 				_movimentoJogador.levantar ();
 				_dadosJogador.dadosJogador.acao1 = "Parado";
 			}
+			if (!Input.GetKey (KeyCode.LeftControl)) {
+				_movimentoJogador.levantar ();
+			}
 		} 
 		// ********** SE MODO DE ESTADO FOR PARA ESCADA OU JOGADOR SOBRE ESCADA *************/
 		if (_dadosJogador.dadosJogador.getTipoMovimento () == "MovimentoEscada") {
@@ -181,6 +184,7 @@ public class RegrasJogador : MonoBehaviour {
 				else if (Input.GetKey (KeyCode.A) && Input.GetKey (KeyCode.W)) {// diagolan superior
 					_movimentoJogador.Pulo (new Vector3 (-1, 1.2f), _movimentoJogador.jump/2);
 				}
+
 
 			}
 			if (
@@ -208,7 +212,7 @@ public class RegrasJogador : MonoBehaviour {
 		}
 	*/
 		// se click de ataque
-		if(Input.GetButtonUp("Fire1") ) { 
+		if(Input.GetButtonUp("Fire1") && !_movimentoJogador.escoradoNaParede ) { 
 
 			// se esquerda aponte o ataque a esquerda
 			if (_movimentoJogador.getDirecao() == "esquerda") {
@@ -220,6 +224,7 @@ public class RegrasJogador : MonoBehaviour {
 				Debug.Log ("fire");
 			}
 		}
+
 	}
 
 	void VerificarDirecao(){

@@ -77,6 +77,7 @@ public class DanoGeral : MonoBehaviour
 				Debug.Log ("acertando o inimigo  "+ cl.name );
 
 			}
+		// se o tiro pegar na espad
 			if (cl.name == "AtaqueBalisticoCanhao"&& name == "AtaqueEspadaSimples") {
 
 				//cl.GetComponent<Rigidbody2D>()
@@ -87,19 +88,21 @@ public class DanoGeral : MonoBehaviour
 				DanoGeral dg = cl.GetComponent<DanoGeral> ();
 				Rigidbody2D rb = cl.GetComponent<Rigidbody2D> ();
 
-			Random x = new Random();
-		
+			Debug.Log (name + " " + isLeft);
 				if (dg.isLeft == true) {
-				rb.velocity = new Vector3 (-10,0   );
-				rb.rotation = 35;
-					//	rb.AddForce (  new Vector3 (1000, 0, 0) );
-					dg.isLeft = !dg.isLeft;
+					
+					//	rb.A/ddForce (  new Vector3 (1000, 0, 0) );
+							//dg.isLeft = !dg.isLeft;
+							rb.velocity = new Vector3 (10,0   );
+							rb.rotation = 35;
 
-				} if (dg.isLeft == false)  {
-					rb.velocity = new Vector3 (	10, 0);
-				rb.rotation = -35;
+				} 
+				if (dg.isLeft == false)  {
+					
 					//	rb.AddForce ( new Vector3 (-1000, 0, 0) ) ;
-					dg.isLeft = !dg.isLeft;
+					//dg.isLeft = !dg.isLeft;
+					rb.velocity = new Vector3 (	-10, 0);
+					rb.rotation = 35;
 				}
 
 

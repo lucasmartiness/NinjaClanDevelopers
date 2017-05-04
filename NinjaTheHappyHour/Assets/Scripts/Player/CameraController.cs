@@ -31,11 +31,11 @@ public class CameraController : MonoBehaviour {
 
 	}
     void SeguirJogador(float x , float y,float z)
-    {
+	{
 		
-        transform.position = new Vector3(x, y , z);
+		transform.position = new Vector3 (x, y, z);
 
-		PosicaoJogadorNaCamera = componenteCamera.WorldToViewportPoint(jogador.transform.position);
+		PosicaoJogadorNaCamera = componenteCamera.WorldToViewportPoint (jogador.transform.position);
 
 
 		// VALORES PosicaoJogadorNaCamera.Y PROXIMOS DE 0 INDICAM QUE O PERSONAGEM ESTÁ MUITO EMBAIXO NA TELA MAS VALORES ALTOS INDICAM QUE O PERSONAGEM ESTÁ MUITO NO ALTO DA TELA
@@ -53,6 +53,11 @@ public class CameraController : MonoBehaviour {
 			transform.position = vetor;
 
 		} 
-    }
-
+		Vector3 vetorX = Vector3.zero;
+		vetorX.x = transform.position.x;
+		vetorX.z = transform.position.z;
+		vetorX.y = transform.position.y + Input.mouseScrollDelta.y;
+		transform.position = vetorX;
+	
+	}
 }

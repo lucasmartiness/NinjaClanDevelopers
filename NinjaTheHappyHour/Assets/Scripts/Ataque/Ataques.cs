@@ -31,7 +31,7 @@ public class Ataques : MonoBehaviour {
 			}
 				if(timer >= 3 ) {
 					acaoAtaque = "atirando";
-					AtaqueTiroTorreta (posicaoTiro, isLeft);
+				AtaqueTiroTorreta (posicaoTiro,isLeft);
 					timer = 0;
 				}
 
@@ -39,18 +39,18 @@ public class Ataques : MonoBehaviour {
 				
 		}
 	}
-	public void AtaqueSabre(Vector3 position,bool isLeft,string nomeAtaque){
+	public void AtaqueSabre(Vector3 position,bool Left,string nomeAtaque){
 
 
 		GameObject espada = Instantiate (ataqueEspada,position,new Quaternion());
 		espada.name = nomeAtaque;
-		if (isLeft) {
+		if (Left) {
 			Vector3 scaleTmp = espada.transform.localScale;
 			scaleTmp.x *= -1;
 			espada.transform.localScale = scaleTmp;
 		}
 	}
-	public void AtaqueTiroTorreta(Vector3 position,bool isLeft){
+	public void AtaqueTiroTorreta(Vector3 position,bool Left){
 
 
 		GameObject tiro = Instantiate (tiroTorreta, transform.position+position, new Quaternion (0, 0, 0, 0));
@@ -63,10 +63,10 @@ public class Ataques : MonoBehaviour {
 	
 
 			
-			DanoGeral dg = tiro.GetComponent<DanoGeral> ();
-			dg.isLeft = isLeft;
+			tiro.GetComponent<DanoGeral> ().isLeft = isLeft;
+			
 
-		if (isLeft) {
+		if (Left) {
 				Vector3 scaleTmp = tiro.transform.localScale;
 				scaleTmp.x *= -1;
 				tiro.transform.localScale = scaleTmp;
