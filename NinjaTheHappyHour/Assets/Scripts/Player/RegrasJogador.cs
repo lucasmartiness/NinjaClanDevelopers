@@ -145,22 +145,22 @@ public class RegrasJogador : MonoBehaviour {
 			}
 			if (Input.GetKeyUp (KeyCode.LeftShift)) {
 				if(_movimentoJogador.getDirecao() == "esquerda")
-					_movimentoJogador.dash (Vector3.left,350);
+					_movimentoJogador.dash (Vector3.left,_movimentoJogador.dashpower);
 				if(_movimentoJogador.getDirecao() == "direita" ) 
-					_movimentoJogador.dash (Vector3.right,350);
+					_movimentoJogador.dash (Vector3.right,_movimentoJogador.dashpower);
 			}
 
 			// ****************** SE O JOGADOR SE AGAIXAR ************************/
-			if (Input.GetKeyDown(KeyCode.LeftControl)) {
+			if (Input.GetKeyDown(KeyCode.S)) {
 				_movimentoJogador.agachar ();
 				_dadosJogador.dadosJogador.acao1 = "Agachado";
 			}
 			// ****************** SE O JOGADOR SE LEVANTAR ************************/
-			if ( Input.GetKeyUp(KeyCode.LeftControl)  ) {
+			if ( Input.GetKeyUp(KeyCode.S)  ) {
 				_movimentoJogador.levantar ();
 				_dadosJogador.dadosJogador.acao1 = "Parado";
 			}
-			if (!Input.GetKey (KeyCode.LeftControl)) {
+			if (!Input.GetKey (KeyCode.S)) {
 				_movimentoJogador.levantar ();
 			}
 		} 

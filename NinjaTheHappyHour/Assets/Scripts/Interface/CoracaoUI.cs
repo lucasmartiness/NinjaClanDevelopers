@@ -9,6 +9,8 @@ public class CoracaoUI : MonoBehaviour
 	CoracaoDanificado,
 	CoracaoVisualizado;
 
+	int coracaoQuebrado,coracaoNormal;// valor que representa o coração no estado normal e quebrado
+	int valor;// valor da vida do jogador
 	// debug
 
 	public enum coracaoAcao
@@ -20,6 +22,17 @@ public class CoracaoUI : MonoBehaviour
 	public coracaoAcao acao = coracaoAcao.normal;
 
 	void Update(){
+
+		if (valor == coracaoQuebrado) {
+			acao = coracaoAcao.quebrado;
+		} 
+		else if (valor >= coracaoQuebrado && valor <= coracaoNormal) {
+			acao = coracaoAcao.normal;
+		} 
+		else {
+			acao = coracaoAcao.desaparecido;
+		}
+
 
 		if (acao == coracaoAcao.normal) {
 			CoracaoVisualizado = MudarCoracaoVisualizadoJanela ("coraçãoIntegro");
@@ -36,8 +49,20 @@ public class CoracaoUI : MonoBehaviour
 
 
 	}
+	public void setRegrasCoracao(int valorCoracaoQuebrado,int valorCoracaoIntegro){
+		coracaoQuebrado = valorCoracaoQuebrado;
+		coracaoNormal = valorCoracaoIntegro;
+	
+	}
 	//debug end
-
+	public void setRegrasCoracao(int valorCoracaoQuebrado,int valorCoracaoIntegro,int valorAtual){
+		coracaoQuebrado = valorCoracaoQuebrado;
+		coracaoNormal = valorCoracaoIntegro;
+		this.valor = valorAtual;
+	}
+	public void updateRegrasCoracao(int valorAtual){
+		this.valor = valorAtual;
+	}
 	public void SetCoracaoIntegro(Sprite img)
 	{
 		CoracaoIntegro = img;

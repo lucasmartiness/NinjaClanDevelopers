@@ -68,9 +68,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1262394354525120}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.027519345, y: -0.84925044, z: 111.8}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4385435044681248}
   m_Father: {fileID: 0}
@@ -88,7 +88,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.5
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -150,9 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9470bee4ce515da4a8db7825d3714bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LimiteVida: 3
+  LimiteVida: 5
   dadosJogador:
-    vida: 5
+    vida: 3
     dano: 2
     acao1: 
     tipoMovimento: 
@@ -188,8 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25278d273e5faa44597663e975684c55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
-  jump: 450
+  speed: 5
+  jump: 500
   direcao: direita
   movement: {x: 0, y: 0, z: 0}
   numeroPulos: 0
@@ -197,6 +197,7 @@ MonoBehaviour:
   direcaoParede: 
   dentroDaEscada: 0
   sobreChao: 0
+  dashpower: 500
 --- !u!212 &212916808058812852
 SpriteRenderer:
   m_ObjectHideFlags: 1

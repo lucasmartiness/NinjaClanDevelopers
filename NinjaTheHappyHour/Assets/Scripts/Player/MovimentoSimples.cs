@@ -17,7 +17,7 @@ public class MovimentoSimples : MonoBehaviour {
 	public string direcaoParede = "direita";
 	public bool dentroDaEscada;
 	public bool sobreChao;
-
+	public int dashpower = 400;
 	public void MovimentoVertical(float direcao,float speed){
 		// pega o movimento multiplica pela velocidade e pelo delta time e transforma em diração global para movimentar
 
