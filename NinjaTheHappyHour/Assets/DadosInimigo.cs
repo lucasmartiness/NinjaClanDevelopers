@@ -10,10 +10,12 @@ public class DadosInimigo : MonoBehaviour {
 		//public int dano;// public for debug
 		public string acao1;// public for debug only
 		Ataques _ataqueInimigo;
+		public string tipoInimigo;
 		
 	// Use this for initialization
 	void Start () {
 		_ataqueInimigo = GetComponent<Ataques> ();
+
 	}
 	
 	// Update is called once per frame

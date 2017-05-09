@@ -14,6 +14,7 @@ public class Ataques : MonoBehaviour {
 	public bool isLeft;
 	float timer = 0;
 
+
 	// maquina estado ataque
 	public string acaoAtaque;
 
@@ -27,23 +28,23 @@ public class Ataques : MonoBehaviour {
 				if (timer < 3) {
 					acaoAtaque = "carregandoArma";
 					timer += Time.deltaTime;
-					}
-			}
-				if(timer >= 3 ) {
+				}
+				}
+				if (timer >= 3) {
 					acaoAtaque = "atirando";
-				AtaqueTiroTorreta (posicaoTiro,isLeft);
+					AtaqueTiroTorreta (posicaoTiro, isLeft);
 					timer = 0;
 				}
-
-
-				
-		}
+	
+		} 
 	}
-	public void AtaqueSabre(Vector3 position,bool Left,string nomeAtaque){
+
+	public void AtaqueSabre(Vector3 position,bool Left,string nomeataque){
 
 
 		GameObject espada = Instantiate (ataqueEspada,position,new Quaternion());
-		espada.name = nomeAtaque;
+		espada.name = nomeataque;
+		espada.GetComponent<DanoGeral> ().nome = nomeataque;
 		if (Left) {
 			Vector3 scaleTmp = espada.transform.localScale;
 			scaleTmp.x *= -1;
@@ -52,10 +53,10 @@ public class Ataques : MonoBehaviour {
 	}
 	public void AtaqueTiroTorreta(Vector3 position,bool Left){
 
-
-		GameObject tiro = Instantiate (tiroTorreta, transform.position+position, new Quaternion (0, 0, 0, 0));
+			
+			GameObject tiro = Instantiate (tiroTorreta, transform.position+position, new Quaternion (0, 0, 0, 0));
 			tiro.name = "ataqueTiroTorreta";
-
+			
 			Rigidbody2D rb = tiro.GetComponent<Rigidbody2D> ();
 			
 

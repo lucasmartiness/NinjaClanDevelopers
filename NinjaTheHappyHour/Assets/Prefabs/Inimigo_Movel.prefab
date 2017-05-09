@@ -55,9 +55,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1633917082607290}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.2, y: -2.9, z: 0.296875}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.057481, y: 5.80075, z: 112.09688}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4409396874765586}
   m_Father: {fileID: 0}
@@ -168,9 +168,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movimentoID: andar
-  posInicial: {x: 22, y: -2.9, z: 0.296875}
+  posInicial: {x: 8, y: 13, z: 0.296875}
   posFinal: {x: 0, y: 0, z: 0}
-  distancia: 10
+  distancia: 5
   velocidade: 0.1
 --- !u!114 &114890377317820232
 MonoBehaviour:

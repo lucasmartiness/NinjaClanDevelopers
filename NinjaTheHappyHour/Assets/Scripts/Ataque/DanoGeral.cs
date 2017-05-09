@@ -6,7 +6,7 @@ public class DanoGeral : MonoBehaviour
 {	
 	// se refere as ações da bala ou da espadada
 	[SerializeField]
-	private string nome;
+	public string nome;
 
 	[SerializeField]	
 	private int dano;
@@ -26,6 +26,8 @@ public class DanoGeral : MonoBehaviour
 		if(nome=="AtaqueBalisticoCanhao")
 			StartCoroutine ("endObject",5.5f);
 		if(nome=="AtaqueEspadaSimples")
+			StartCoroutine ("endObject",0.5f);
+		if(nome=="AtaqueEspadaInimigo")
 			StartCoroutine ("endObject",0.5f);
 	}
 
@@ -49,7 +51,7 @@ public class DanoGeral : MonoBehaviour
 	}
 	void OnTriggerEnter2D(Collider2D cl){
 
-			if (nome == "AtaqueBalisticoCanhao") {
+			if (nome == "AtaqueBalisticoCanhao") {// se eu o ataque balistico pegar no jogador então eu morro mas pego dano do jogador
 				if (cl.gameObject.CompareTag ("Player")) {
 					Debug.Log ("ataque do  inimigo no jogador " +  cl.gameObject.name);
 					DadosJogador dj =cl.GetComponent<DadosJogador>();
@@ -57,7 +59,7 @@ public class DanoGeral : MonoBehaviour
 					Destroy (gameObject);
 				Debug.Log ("causar dano no jogador");
 				}
-				if (cl.gameObject.CompareTag ("Chao") ||
+				if (cl.gameObject.CompareTag ("Chao") || // se ataque balistico eu pegar no chao ou parede eu morro
 					cl.gameObject.CompareTag("ParedeDireita")||
 					cl.gameObject.CompareTag("ParedeEsquerda") 
 					)
@@ -69,7 +71,17 @@ public class DanoGeral : MonoBehaviour
 
 		 // se nome deste ataque for ataque espada simples e a tag for a do inimigo então lhe tire dano
 			//Debug.Log ("ataque do jogador no inimigo " + cl.gameObject.name);
-			if ( cl.gameObject.CompareTag ("Inimigo") && nome == "AtaqueEspadaSimples")
+	
+		if ( cl.gameObject.CompareTag ("Player") && nome == "AtaqueEspadaInimigo") // se eu acertar o inimigo e meu nome for espada simples então danificar inimigo
+		{
+
+			DadosJogador di = cl.GetComponent<DadosJogador>();
+			di.dadosJogador.setVida(di.dadosJogador.getVida() - 1) ;
+
+			Debug.Log ("acertando o jogador com espada inimigo  "+ cl.name );
+
+		}
+		if ( cl.gameObject.CompareTag ("Inimigo") && nome == "AtaqueEspadaSimples") // se eu acertar o inimigo e meu nome for espada simples então danificar inimigo
 			{
 				
 				DadosInimigo di = cl.GetComponent<DadosInimigo>();
@@ -77,8 +89,8 @@ public class DanoGeral : MonoBehaviour
 				Debug.Log ("acertando o inimigo  "+ cl.name );
 
 			}
-		// se o tiro pegar na espad
-			if (cl.name == "AtaqueBalisticoCanhao"&& name == "AtaqueEspadaSimples") {
+		// se o tiro pegar na espada do jogador
+			if (cl.name == "AtaqueBalisticoCanhao" && name == "AtaqueEspadaSimples") {
 
 				//cl.GetComponent<Rigidbody2D>()
 
@@ -88,7 +100,7 @@ public class DanoGeral : MonoBehaviour
 				DanoGeral dg = cl.GetComponent<DanoGeral> ();
 				Rigidbody2D rb = cl.GetComponent<Rigidbody2D> ();
 
-			Debug.Log (name + " " + isLeft);
+		//	Debug.Log (name + " " + isLeft);
 				if (dg.isLeft == true) {
 					
 					//	rb.A/ddForce (  new Vector3 (1000, 0, 0) );
@@ -107,6 +119,9 @@ public class DanoGeral : MonoBehaviour
 
 
 			}
+
+
+
 	}
 
 }
