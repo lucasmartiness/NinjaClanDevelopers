@@ -10,6 +10,7 @@ public class DadosJogador : MonoBehaviour {
 	[System.Serializable]
 	public class DadosJogadorMemoria{
 
+
 		public int vida ;// for debug public
 		public int dano;// public for debug
 		public string acao1;// public for debug only

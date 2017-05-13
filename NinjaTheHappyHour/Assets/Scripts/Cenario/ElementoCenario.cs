@@ -40,10 +40,13 @@ public class ElementoCenario : MonoBehaviour {
 				player.numPulo = 0;
 				player.bloquearPuloVertival = true;
 
+			//	Rigidbody2D rb = player.GetComponent<Rigidbody2D> ();
+			//	rb.velocity = new Vector2 (rb.velocity.x, 0);
 
+			//	Debug.Log ("teste velocidade x");
 				if ((ParedeIsLeft && player.SeraEsquerda) || (!ParedeIsLeft && !player.SeraEsquerda)) {
 					player.SeraEsquerda = !player.SeraEsquerda;
-				
+
 					player.transform.localScale = new Vector2 (player.transform.localScale.x * -1, 1);
 
 				} else {

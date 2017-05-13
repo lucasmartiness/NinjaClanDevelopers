@@ -18,6 +18,8 @@ public class MovimentoSimples : MonoBehaviour {
 	public bool dentroDaEscada;
 	public bool sobreChao;
 	public int dashpower = 400;
+
+
 	public void MovimentoVertical(float direcao,float speed){
 		// pega o movimento multiplica pela velocidade e pelo delta time e transforma em diração global para movimentar
 
@@ -41,7 +43,7 @@ public class MovimentoSimples : MonoBehaviour {
 		movement *= Time.deltaTime;
 		movement = transform.TransformDirection(movement);
 		transform.Translate (movement);
-		Rigidbody2D rb = GetComponent<Rigidbody2D> ();
+	//	Rigidbody2D rb = GetComponent<Rigidbody2D> ();
 	
 		// animar sprite
 		//SpriteController _spriteController = GameObject.FindGameObjectWithTag ("Player").GetComponentInChildren<SpriteController> ();
@@ -68,7 +70,6 @@ public class MovimentoSimples : MonoBehaviour {
 		Rigidbody2D fisica = GameObject.FindGameObjectWithTag ("Player").GetComponent<Rigidbody2D> ();
 		fisica.velocity = new Vector2 (fisica.velocity.x, 0);
 		fisica.AddRelativeForce (movimentoPulo, ForceMode2D.Impulse);
-		//GetComponent<Rigidbody2D> ().AddForce (movimentoPulo,ForceMode2D.Impulse);
 		numeroPulos++;
 	}
 
@@ -96,6 +97,9 @@ public class MovimentoSimples : MonoBehaviour {
 		}
 		if (cl.gameObject.CompareTag ("Parede") && sobreChao == false) {
 			escoradoNaParede = true;
+			//if primeira entrada na parede então execute abaixo mas se sair então desliga o bool deste if aqui
+			//Rigidbody2D rb = GetComponent<Rigidbody2D> ();
+			//rb.velocity = new Vector2 (rb.velocity.x, 0);
 		}
 		if (cl.gameObject.CompareTag ("ParedeEsquerda") && sobreChao == false) {
 			escoradoNaParede = true;
@@ -146,7 +150,7 @@ public class MovimentoSimples : MonoBehaviour {
 			if (gameObject.CompareTag ("Player")) {
 				Rigidbody2D rb = GetComponent<Rigidbody2D> ();
 				rb.gravityScale = 0;
-				rb.velocity = new Vector2 (0, 0);
+				rb.velocity = new Vector2 (rb.velocity.x, 0);
 			}
 		}
 

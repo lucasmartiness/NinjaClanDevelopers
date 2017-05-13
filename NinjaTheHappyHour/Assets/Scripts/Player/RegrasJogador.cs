@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 [RequireComponent(typeof(MovimentoSimples)) ]
 [RequireComponent(typeof(SpriteController) )]
 [RequireComponent(typeof(DadosJogador) ) ]
@@ -15,67 +18,127 @@ public class RegrasJogador : MonoBehaviour {
 	public SpriteController _spriteController;
 	public DadosJogador _dadosJogador;
 	public GameObject jogadorX;
+	public  int chances ;
 
-	void Start () {
-		jogadorX = GameObject.FindGameObjectWithTag ("Player");
+	public static RegrasJogador regrasJogador;
+
+
+	void Start(){
+		
+		//
+		DontDestroyOnLoad (gameObject);
+
+
+		if (regrasJogador != null) {
+
+			Destroy (gameObject);
+
+		}
+		else{
+
+
+			regrasJogador = this;
+			//
+			regrasJogador.chances = 2;
+
+
+		}
+
+
+		regrasJogador.jogadorX = GameObject.FindGameObjectWithTag ("Player");
 		// pega o componente do jogador
-		_movimentoJogador = GameObject.FindGameObjectWithTag("Player").GetComponent<MovimentoSimples> ();
-		_dadosJogador = GameObject.FindGameObjectWithTag("Player").GetComponent<DadosJogador> ();
-		_spriteController = GameObject.FindGameObjectWithTag ("Player").GetComponentInChildren<SpriteController> ();
+		regrasJogador._movimentoJogador = GameObject.FindGameObjectWithTag("Player").GetComponent<MovimentoSimples> ();
+		regrasJogador._dadosJogador = GameObject.FindGameObjectWithTag("Player").GetComponent<DadosJogador> ();
+		regrasJogador._spriteController = GameObject.FindGameObjectWithTag ("Player").GetComponentInChildren<SpriteController> ();
 		//_movimentoJogador.setDirecao ("esquerda");
+		regrasJogador._dadosJogador.dadosJogador.setVida (6);
+
+
+
 	}
+
 	
 	// Update is called once per frame
-
+	public void DestruirAoSair(){
+		Destroy(gameObject);
+	}
 	void FixedUpdate()
 	{
-		// CAPTURAR INPUT 
-		CapturarInput ();
+		GameObject.Find ("contadorChances").GetComponent<Text> ().text = chances.ToString ();
+		if (_movimentoJogador != null
+		    && _spriteController != null
+		    && _dadosJogador != null
+		    && jogadorX != null) {
+
+
+			// CAPTURAR INPUT 
+			CapturarInput ();
+			Debug.Log ("quantidade de chances: " + chances);
+		}
 	}
-	void Update () {
-
-
+	void ExecutarRegrasJogador(){
 
 
 
 		// REGRAS
 		VerificarDirecao();
 
+		if (regrasJogador._dadosJogador.dadosJogador.vida <= 0) {
 
+			// se o jogador tem algum check point com as informações gravadas e numero de chances suficientes
+
+			// se o jogador só tem numero de chances suficientes
+			regrasJogador._dadosJogador.dadosJogador.vida = 6;
+			regrasJogador.chances--;
+			SceneManager.LoadScene ("PrototipoBasico4");
+			// se o jogador não tem chances não então execute denovo a cena ou chame game over
+			if (chances <= 0) {
+				Debug.Log ("FIM DA FAZE chances = " + regrasJogador.chances);
+				Destroy (gameObject);
+				SceneManager.LoadScene ("MenuPrincipal");
+
+			}
+			//SceneManager.LoadScene ("PrototipoBasico4");
+
+		}
 
 		/*******************************************************************************************************************************/
 		// MAQUINA DE ESTADOS
 		/*******************************************************************************************************************************/
 		//*******MODO DE ESTADOS ESCORADO NA PAREDE *******************/
 
-		if (_movimentoJogador.getEscoradoParede() &&
-			!_movimentoJogador.dentroDaEscada && 
-			!_movimentoJogador.getSobreChao()
+		if (regrasJogador._movimentoJogador.getEscoradoParede() &&
+			!regrasJogador._movimentoJogador.dentroDaEscada && 
+			!regrasJogador._movimentoJogador.getSobreChao()
 		)
 		{ // se o jogador estiver escorado na parede
-		
-			_dadosJogador.dadosJogador.setTipoMovimento ("MovimentoParede");
-			if (_movimentoJogador.movement.y > 0 || _movimentoJogador.GetComponent<Rigidbody2D> ().velocity.y > 0) { // subindo
+
+			//Rigidbody2D rb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D> ();
+			//rb.velocity = new Vector2 (rb.velocity.x, 0);
+			//Debug.Log ("teste colisão com parede");
+
+			regrasJogador._dadosJogador.dadosJogador.setTipoMovimento ("MovimentoParede");
+			if (regrasJogador._movimentoJogador.movement.y > 0 || regrasJogador._movimentoJogador.GetComponent<Rigidbody2D> ().velocity.y > 0) { // subindo
 				_dadosJogador.dadosJogador.setAcao ("SubindoParede");
 			}
-			if (_movimentoJogador.movement.y < 0 || _movimentoJogador.GetComponent<Rigidbody2D> ().velocity.y < 0) { // subindo
-				_dadosJogador.dadosJogador.setAcao ("DescendoParede");
+			if (regrasJogador._movimentoJogador.movement.y < 0 || regrasJogador._movimentoJogador.GetComponent<Rigidbody2D> ().velocity.y < 0) { // subindo
+				regrasJogador._dadosJogador.dadosJogador.setAcao ("DescendoParede");
 			}
 
-		
+
 		} 
-		if (!_movimentoJogador.getEscoradoParede() )
-		  {
+		if (!regrasJogador._movimentoJogador.getEscoradoParede() )
+		{
 
-				// se jogador estiver na escada
-			if (_movimentoJogador.dentroDaEscada) {
-				_movimentoJogador.AtivarGravidade (false);
-				_dadosJogador.dadosJogador.setTipoMovimento ("MovimentoEscada");
+			// se jogador estiver na escada
+			if (regrasJogador._movimentoJogador.dentroDaEscada) {
+				regrasJogador._movimentoJogador.AtivarGravidade (false);
+				regrasJogador._dadosJogador.dadosJogador.setTipoMovimento ("MovimentoEscada");
 			}
-		
-			if(!_movimentoJogador.dentroDaEscada){
-				_movimentoJogador.AtivarGravidade (true);
-				_dadosJogador.dadosJogador.setTipoMovimento ("MovimentoSimples");
+
+			if(!regrasJogador._movimentoJogador.dentroDaEscada){
+				regrasJogador._movimentoJogador.AtivarGravidade (true);
+				regrasJogador._dadosJogador.dadosJogador.setTipoMovimento ("MovimentoSimples");
 			}
 
 		}
@@ -85,43 +148,56 @@ public class RegrasJogador : MonoBehaviour {
 
 		*/
 		/**********MODO DE ESTADO NÃO ESCORADO NA PAREDE**************/
-		if (!_movimentoJogador.getEscoradoParede() &&
-			!_movimentoJogador.dentroDaEscada ) {// se estiver fora da escada e da parede então está no chão
+		if (!regrasJogador._movimentoJogador.getEscoradoParede() &&
+			!regrasJogador._movimentoJogador.dentroDaEscada ) {// se estiver fora da escada e da parede então está no chão
 
 			//MovimentoSimples
-			_dadosJogador.dadosJogador.setTipoMovimento ("MovimentoSimples");// SET MODO DE ESTADO OU TIPO DE MOVIMENTO PARA SIMPLES CASO NÃO ESTEJA NA PAREDE
-			if (Input.GetAxis ("Horizontal") != 0 && _movimentoJogador.movement.y == 0) {		// existe movimento horizontal mas não vertical
-				
-				_dadosJogador.dadosJogador.setAcao ("AndandoHorizontal");
+			regrasJogador._dadosJogador.dadosJogador.setTipoMovimento ("MovimentoSimples");// SET MODO DE ESTADO OU TIPO DE MOVIMENTO PARA SIMPLES CASO NÃO ESTEJA NA PAREDE
+			if (Input.GetAxis ("Horizontal") != 0 &&regrasJogador._movimentoJogador.movement.y == 0) {		// existe movimento horizontal mas não vertical
+
+				regrasJogador._dadosJogador.dadosJogador.setAcao ("AndandoHorizontal");
 			}
 
-			if (_movimentoJogador.movement.x == 0 && _movimentoJogador.movement.y == 0) {	// nenhum movimento
-				_dadosJogador.dadosJogador.setAcao ("Parado");
+			if (regrasJogador._movimentoJogador.movement.x == 0 && regrasJogador._movimentoJogador.movement.y == 0) {	// nenhum movimento
+				regrasJogador._dadosJogador.dadosJogador.setAcao ("Parado");
 			}
-			if (_movimentoJogador.movement.y > 0 || _movimentoJogador.GetComponent<Rigidbody2D> ().velocity.y > 0) { // subindo
-				_dadosJogador.dadosJogador.setAcao ("PuloSimples");
+			if (regrasJogador._movimentoJogador.movement.y > 0 || regrasJogador._movimentoJogador.GetComponent<Rigidbody2D> ().velocity.y > 0) { // subindo
+				regrasJogador._dadosJogador.dadosJogador.setAcao ("PuloSimples");
 			}
-			if (_movimentoJogador.movement.y < 0 || _movimentoJogador.GetComponent<Rigidbody2D> ().velocity.y < 0) { // subindo
-				_dadosJogador.dadosJogador.setAcao ("Caindo");
+			if (regrasJogador._movimentoJogador.movement.y < 0 || regrasJogador._movimentoJogador.GetComponent<Rigidbody2D> ().velocity.y < 0) { // subindo
+				regrasJogador._dadosJogador.dadosJogador.setAcao ("Caindo");
 			}
 
 		}
 		/*******************************************************************************************************************************/
 		// ESTADOS ANIMAÇÕES
 		/*******************************************************************************************************************************/
-		if ( _dadosJogador.dadosJogador.getAcao() == "AndandoHorizontal") {
-			_spriteController.executarAnimacaoJogador ("Correr");
+		if ( regrasJogador._dadosJogador.dadosJogador.getAcao() == "AndandoHorizontal") {
+			regrasJogador._spriteController.executarAnimacaoJogador ("Correr");
 		}
-		if (_dadosJogador.dadosJogador.getAcao() == "Parado" ) {
-			_spriteController.executarAnimacaoJogador ("Parado");
+		if (regrasJogador._dadosJogador.dadosJogador.getAcao() == "Parado" ) {
+			regrasJogador._spriteController.executarAnimacaoJogador ("Parado");
 		}
-		if (_dadosJogador.dadosJogador.getAcao () == "PuloSimples") {
-			_spriteController.executarAnimacaoJogador ("Pular");
+		if (regrasJogador._dadosJogador.dadosJogador.getAcao () == "PuloSimples") {
+			regrasJogador._spriteController.executarAnimacaoJogador ("Pular");
 		}	
-		if (_dadosJogador.dadosJogador.getAcao () == "Caindo") {
-			_spriteController.executarAnimacaoJogador ("Cair");
+		if (regrasJogador._dadosJogador.dadosJogador.getAcao () == "Caindo") {
+			regrasJogador._spriteController.executarAnimacaoJogador ("Cair");
 		}
 		/*******************************************************************************************************************************/
+
+
+
+	}
+	void Update () {
+
+
+		if (_movimentoJogador != null
+		   && _spriteController != null
+		   && _dadosJogador != null
+		   && jogadorX != null) {
+			ExecutarRegrasJogador ();
+		}
 	}
 
 
@@ -131,73 +207,74 @@ public class RegrasJogador : MonoBehaviour {
 
 		// captura movimento e pulo
 		// ****** SE MODO DE ESTADO FOR PARA MOVIMENTO SIMPLES ENTÃO CAPTURE TECLAS PARA MOVIMENTO SIMPLES *************/
-		if (_dadosJogador.dadosJogador.getTipoMovimento () == "MovimentoSimples" &&
-			!_movimentoJogador.dentroDaEscada ) {
+		if (regrasJogador._dadosJogador.dadosJogador.getTipoMovimento () == "MovimentoSimples" &&
+			!regrasJogador._movimentoJogador.dentroDaEscada ) {
 
-			_movimentoJogador.MovimentoHorizontal (Input.GetAxis ("Horizontal"), _movimentoJogador.speed);// aciona o movimento do jogador
+			regrasJogador._movimentoJogador.MovimentoHorizontal (Input.GetAxis ("Horizontal"), regrasJogador._movimentoJogador.speed);// aciona o movimento do jogador
 
 			//*****************SE FOR EXECUTADO O PULO ***********************/
 			if (Input.GetKeyUp (KeyCode.W)) { // SE FOR EXECUTADO O PULO 
 
-				if (_movimentoJogador.getNumPulos () < 2) // se menos que dois pulos
-					_movimentoJogador.Pulo (Vector3.up, _movimentoJogador.jump);
+				if (regrasJogador._movimentoJogador.getNumPulos () < 2) // se menos que dois pulos
+					regrasJogador._movimentoJogador.Pulo (Vector3.up, regrasJogador._movimentoJogador.jump);
 
 			}
 			if (Input.GetKeyUp (KeyCode.LeftShift)) {
-				if(_movimentoJogador.getDirecao() == "esquerda")
-					_movimentoJogador.dash (Vector3.left,_movimentoJogador.dashpower);
-				if(_movimentoJogador.getDirecao() == "direita" ) 
-					_movimentoJogador.dash (Vector3.right,_movimentoJogador.dashpower);
+				if(regrasJogador._movimentoJogador.getDirecao() == "esquerda")
+					regrasJogador._movimentoJogador.dash (Vector3.left,regrasJogador._movimentoJogador.dashpower);
+				if(regrasJogador._movimentoJogador.getDirecao() == "direita" ) 
+					regrasJogador._movimentoJogador.dash (Vector3.right,regrasJogador._movimentoJogador.dashpower);
 			}
 
 			// ****************** SE O JOGADOR SE AGAIXAR ************************/
 			if (Input.GetKeyDown(KeyCode.S)) {
-				_movimentoJogador.agachar ();
-				_dadosJogador.dadosJogador.acao1 = "Agachado";
+				regrasJogador._movimentoJogador.agachar ();
+				regrasJogador._dadosJogador.dadosJogador.acao1 = "Agachado";
+				regrasJogador._dadosJogador.dadosJogador.setAcao ("Agachado");
 			}
 			// ****************** SE O JOGADOR SE LEVANTAR ************************/
 			if ( Input.GetKeyUp(KeyCode.S)  ) {
-				_movimentoJogador.levantar ();
-				_dadosJogador.dadosJogador.acao1 = "Parado";
+				regrasJogador._movimentoJogador.levantar ();
+				regrasJogador._dadosJogador.dadosJogador.acao1 = "Parado";
 			}
 			if (!Input.GetKey (KeyCode.S)) {
-				_movimentoJogador.levantar ();
+				regrasJogador._movimentoJogador.levantar ();
 			}
 		} 
 		// ********** SE MODO DE ESTADO FOR PARA ESCADA OU JOGADOR SOBRE ESCADA *************/
-		if (_dadosJogador.dadosJogador.getTipoMovimento () == "MovimentoEscada") {
-			_movimentoJogador.MovimentoVertical (Input.GetAxis ("Vertical"), _movimentoJogador.speed);// aciona o movimento do jogador
-			_movimentoJogador.MovimentoHorizontal(Input.GetAxis("Horizontal"),_movimentoJogador.speed);
+		if (regrasJogador._dadosJogador.dadosJogador.getTipoMovimento () == "MovimentoEscada") {
+			regrasJogador._movimentoJogador.MovimentoVertical (Input.GetAxis ("Vertical"), _movimentoJogador.speed);// aciona o movimento do jogador
+			regrasJogador._movimentoJogador.MovimentoHorizontal(Input.GetAxis("Horizontal"),_movimentoJogador.speed);
 		}
 		// ********** SE MODO DE ESTADO FOR PARA PAREDE OU JOGADOR SOBRE PAREDE *************/
-		if (_dadosJogador.dadosJogador.getTipoMovimento () == "MovimentoParede") {
-			_movimentoJogador.MovimentoVertical (Input.GetAxis ("Vertical"), _movimentoJogador.speed);// aciona o movimento do jogador
+		if (regrasJogador._dadosJogador.dadosJogador.getTipoMovimento () == "MovimentoParede") {
+			regrasJogador._movimentoJogador.MovimentoVertical (Input.GetAxis ("Vertical"), regrasJogador._movimentoJogador.speed);// aciona o movimento do jogador
 
 			if ( 
-				_movimentoJogador.getNumPulos () < 2 &&
-				_movimentoJogador.getDirecaoParede()=="direita" ) 
+				regrasJogador._movimentoJogador.getNumPulos () < 2 &&
+				regrasJogador._movimentoJogador.getDirecaoParede()=="direita" ) 
 			{ // SE FOR EXECUTADO O PULO  DA DIREITA PARA ESQUERDA
 
 				if (Input.GetKey (KeyCode.A) && Input.GetKey (KeyCode.S)) {// diagonal inferior
-					_movimentoJogador.Pulo (new Vector3 (-1, -1.2f), _movimentoJogador.jump/3);
+					regrasJogador._movimentoJogador.Pulo (new Vector3 (-1, -1.2f), regrasJogador._movimentoJogador.jump/3);
 				}
 				else if (Input.GetKey (KeyCode.A) && Input.GetKey (KeyCode.W)) {// diagolan superior
-					_movimentoJogador.Pulo (new Vector3 (-1, 1.2f), _movimentoJogador.jump/2);
+					regrasJogador._movimentoJogador.Pulo (new Vector3 (-1, 1.2f), regrasJogador._movimentoJogador.jump/2);
 				}
 
 
 			}
 			if (
-				_movimentoJogador.getNumPulos () < 2 &&
-				_movimentoJogador.getDirecaoParede() == "esquerda" ) 
+				regrasJogador._movimentoJogador.getNumPulos () < 2 &&
+				regrasJogador._movimentoJogador.getDirecaoParede() == "esquerda" ) 
 			{ // SE FOR EXECUTADO O PULO DA ESQUERDA PARA DIREITA
 
 		
 				if (Input.GetKey (KeyCode.D) && Input.GetKey (KeyCode.S)) { // diagonal inferior
-					_movimentoJogador.Pulo (new Vector3 (1, -1.2f), _movimentoJogador.jump/3);
+					regrasJogador.	_movimentoJogador.Pulo (new Vector3 (1, -1.2f), _movimentoJogador.jump/3);
 				}
 				else if (Input.GetKey (KeyCode.D) && Input.GetKey (KeyCode.W)) {// diagonal superior
-					_movimentoJogador.Pulo (new Vector3 (1, 1.2f), _movimentoJogador.jump/2);
+					regrasJogador._movimentoJogador.Pulo (new Vector3 (1, 1.2f),regrasJogador. _movimentoJogador.jump/2);
 				}
 			}
 		}
@@ -212,15 +289,15 @@ public class RegrasJogador : MonoBehaviour {
 		}
 	*/
 		// se click de ataque
-		if(Input.GetButtonUp("Fire1") && !_movimentoJogador.escoradoNaParede ) { 
+		if(Input.GetButtonUp("Fire1") && !regrasJogador._movimentoJogador.escoradoNaParede ) { 
 
 			// se esquerda aponte o ataque a esquerda
-			if (_movimentoJogador.getDirecao() == "esquerda") {
-				GameObject.FindGameObjectWithTag ("Player").GetComponent<Ataques> ().AtaqueSabre (_movimentoJogador.transform.position + new Vector3(-2,0,0), true,"AtaqueEspadaSimples");
+			if (regrasJogador._movimentoJogador.getDirecao() == "esquerda") {
+				GameObject.FindGameObjectWithTag ("Player").GetComponent<Ataques> ().AtaqueSabre (regrasJogador._movimentoJogador.transform.position + new Vector3(-2,0,0), true,"AtaqueEspadaSimples");
 			}
 			// se direita aponte o atque a direita
 			else{
-				GameObject.FindGameObjectWithTag("Player").GetComponent<Ataques>().AtaqueSabre(_movimentoJogador.transform.position + new Vector3(2,0,0),false,"AtaqueEspadaSimples");
+				GameObject.FindGameObjectWithTag("Player").GetComponent<Ataques>().AtaqueSabre(regrasJogador._movimentoJogador.transform.position + new Vector3(2,0,0),false,"AtaqueEspadaSimples");
 				Debug.Log ("fire");
 			}
 		}
@@ -229,23 +306,23 @@ public class RegrasJogador : MonoBehaviour {
 
 	void VerificarDirecao(){
 		
-		float velocidade_x = _movimentoJogador.movement.x;
+		float velocidade_x = regrasJogador._movimentoJogador.movement.x;
 
 
 		// se o movimento for ao contrario da direção então inverta
-		if(	velocidade_x > 0 && jogadorX.GetComponentInChildren<SpriteRenderer>().flipX == true // flip x true é esquerda
-			|| velocidade_x < 0 && jogadorX.GetComponentInChildren<SpriteRenderer>().flipX == false) {// flip x true é direita
-			_movimentoJogador.InvertDirecao();
+		if(	velocidade_x > 0 && regrasJogador.jogadorX.GetComponentInChildren<SpriteRenderer>().flipX == true // flip x true é esquerda
+			|| velocidade_x < 0 && regrasJogador.jogadorX.GetComponentInChildren<SpriteRenderer>().flipX == false) {// flip x true é direita
+			regrasJogador._movimentoJogador.InvertDirecao();
 
-			_spriteController.GetComponent<SpriteRenderer> ().flipX = !_spriteController.GetComponent<SpriteRenderer> ().flipX;
+			regrasJogador._spriteController.GetComponent<SpriteRenderer> ().flipX = !regrasJogador._spriteController.GetComponent<SpriteRenderer> ().flipX;
 		}
 
-		if (jogadorX.GetComponentInChildren<SpriteRenderer>().flipX == true) {
-			_movimentoJogador.setDirecao ("esquerda");
+		if (regrasJogador.jogadorX.GetComponentInChildren<SpriteRenderer>().flipX == true) {
+			regrasJogador._movimentoJogador.setDirecao ("esquerda");
 
 		}
-		if (velocidade_x < 0 && jogadorX.GetComponentInChildren<SpriteRenderer>().flipX == false) {
-				_movimentoJogador.setDirecao ("direita");
+		if (velocidade_x < 0 && regrasJogador.jogadorX.GetComponentInChildren<SpriteRenderer>().flipX == false) {
+			regrasJogador._movimentoJogador.setDirecao ("direita");
 		}
 
 	
