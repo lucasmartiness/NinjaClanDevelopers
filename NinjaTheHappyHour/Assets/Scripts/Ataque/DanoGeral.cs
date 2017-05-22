@@ -53,11 +53,11 @@ public class DanoGeral : MonoBehaviour
 
 			if (nome == "AtaqueBalisticoCanhao") {// se eu o ataque balistico pegar no jogador então eu morro mas pego dano do jogador
 				if (cl.gameObject.CompareTag ("Player")) {
-					Debug.Log ("ataque do  inimigo no jogador " +  cl.gameObject.name);
+					//Debug.Log ("ataque do  inimigo no jogador " +  cl.gameObject.name);
 					DadosJogador dj =cl.GetComponent<DadosJogador>();
 					dj.dadosJogador.levarDano (dano);
 					Destroy (gameObject);
-				Debug.Log ("causar dano no jogador");
+				//Debug.Log ("causar dano no jogador");
 				}
 				if (cl.gameObject.CompareTag ("Chao") || // se ataque balistico eu pegar no chao ou parede eu morro
 					cl.gameObject.CompareTag("ParedeDireita")||
@@ -78,7 +78,7 @@ public class DanoGeral : MonoBehaviour
 			DadosJogador di = cl.GetComponent<DadosJogador>();
 			di.dadosJogador.setVida(di.dadosJogador.getVida() - 1) ;
 
-			Debug.Log ("acertando o jogador com espada inimigo  "+ cl.name );
+			//Debug.Log ("acertando o jogador com espada inimigo  "+ cl.name );
 
 		}
 		if ( cl.gameObject.CompareTag ("Inimigo") && nome == "AtaqueEspadaSimples") // se eu acertar o inimigo e meu nome for espada simples então danificar inimigo
@@ -86,7 +86,7 @@ public class DanoGeral : MonoBehaviour
 				
 				DadosInimigo di = cl.GetComponent<DadosInimigo>();
 				di.levarDano (dano);
-				Debug.Log ("acertando o inimigo  "+ cl.name );
+			//	Debug.Log ("acertando o inimigo  "+ cl.name );
 
 			}
 		// se o tiro pegar na espada do jogador
@@ -95,7 +95,7 @@ public class DanoGeral : MonoBehaviour
 				//cl.GetComponent<Rigidbody2D>()
 
 				//Destroy (cl.gameObject);
-				Debug.Log ("rebater  ");
+				//Debug.Log ("rebater  ");
 
 				DanoGeral dg = cl.GetComponent<DanoGeral> ();
 				Rigidbody2D rb = cl.GetComponent<Rigidbody2D> ();

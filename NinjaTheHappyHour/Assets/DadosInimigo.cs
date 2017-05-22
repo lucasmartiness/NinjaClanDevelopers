@@ -43,7 +43,7 @@ public class DadosInimigo : MonoBehaviour {
 				//Debug.Log ("esperando");
 			} 
 			else {
-				Debug.Log ("falha acao ataque do inimigo "+name);
+				//Debug.Log ("falha acao ataque do inimigo "+name);
 			}
 
 			}

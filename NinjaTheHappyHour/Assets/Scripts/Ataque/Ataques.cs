@@ -13,30 +13,54 @@ public class Ataques : MonoBehaviour {
 	public Vector3 posicaoTiro;
 	public bool isLeft;
 	float timer = 0;
-
-
+	public bool jogadorEscondido;
+//	public float frequenciaAtaque;
 	// maquina estado ataque
 	public string acaoAtaque;
 
 
 	void Update(){
 
-		if (maquinaAutoExecutora) {
-			if (tipoArma == "canhaoVerde") {
 
 
-				if (timer < 3) {
-					acaoAtaque = "carregandoArma";
-					timer += Time.deltaTime;
-				}
+		if (tipoArma != "espadada") {
+			// POSSIVELMENTE É O CANHAO 
+			Vector3 distancia = transform.position -  GameObject.FindGameObjectWithTag ("Player").transform.position ;
+
+			if (distancia.x < 10 && distancia.x > -10 ) {
+
+				maquinaAutoExecutora = true;
+
+			} else {
+				maquinaAutoExecutora = false;
+			}
+
+			if (maquinaAutoExecutora && !jogadorEscondido) {
+				if (tipoArma == "canhaoVerde") {
+
+
+					if (timer < 3) {
+						acaoAtaque = "carregandoArma";
+						timer += Time.deltaTime;
+					}
 				}
 				if (timer >= 3) {
 					acaoAtaque = "atirando";
 					AtaqueTiroTorreta (posicaoTiro, isLeft);
 					timer = 0;
 				}
-	
-		} 
+
+			} 
+		}
+
+
+		if (jogadorEscondido) {
+			maquinaAutoExecutora = false;
+		} else if (!jogadorEscondido){
+			maquinaAutoExecutora = true;
+		}
+
+
 	}
 
 	public void AtaqueSabre(Vector3 position,bool Left,string nomeataque){

@@ -73,7 +73,7 @@ public class RegrasJogador : MonoBehaviour {
 
 			// CAPTURAR INPUT 
 			CapturarInput ();
-			Debug.Log ("quantidade de chances: " + chances);
+		//	Debug.Log ("quantidade de chances: " + chances);
 		}
 	}
 	void ExecutarRegrasJogador(){
@@ -93,7 +93,7 @@ public class RegrasJogador : MonoBehaviour {
 			SceneManager.LoadScene ("PrototipoBasico4");
 			// se o jogador não tem chances não então execute denovo a cena ou chame game over
 			if (chances <= 0) {
-				Debug.Log ("FIM DA FAZE chances = " + regrasJogador.chances);
+			//	Debug.Log ("FIM DA FAZE chances = " + regrasJogador.chances);
 				Destroy (gameObject);
 				SceneManager.LoadScene ("MenuPrincipal");
 
@@ -119,10 +119,10 @@ public class RegrasJogador : MonoBehaviour {
 
 			regrasJogador._dadosJogador.dadosJogador.setTipoMovimento ("MovimentoParede");
 			if (regrasJogador._movimentoJogador.movement.y > 0 || regrasJogador._movimentoJogador.GetComponent<Rigidbody2D> ().velocity.y > 0) { // subindo
-				_dadosJogador.dadosJogador.setAcao ("SubindoParede");
+				//_dadosJogador.dadosJogador.setAcao ("SubindoParede");
 			}
 			if (regrasJogador._movimentoJogador.movement.y < 0 || regrasJogador._movimentoJogador.GetComponent<Rigidbody2D> ().velocity.y < 0) { // subindo
-				regrasJogador._dadosJogador.dadosJogador.setAcao ("DescendoParede");
+				//regrasJogador._dadosJogador.dadosJogador.setAcao ("DescendoParede");
 			}
 
 
@@ -213,13 +213,13 @@ public class RegrasJogador : MonoBehaviour {
 			regrasJogador._movimentoJogador.MovimentoHorizontal (Input.GetAxis ("Horizontal"), regrasJogador._movimentoJogador.speed);// aciona o movimento do jogador
 
 			//*****************SE FOR EXECUTADO O PULO ***********************/
-			if (Input.GetKeyUp (KeyCode.W)) { // SE FOR EXECUTADO O PULO 
+			if (Input.GetKeyDown (KeyCode.W)) { // SE FOR EXECUTADO O PULO 
 
 				if (regrasJogador._movimentoJogador.getNumPulos () < 2) // se menos que dois pulos
 					regrasJogador._movimentoJogador.Pulo (Vector3.up, regrasJogador._movimentoJogador.jump);
 
 			}
-			if (Input.GetKeyUp (KeyCode.LeftShift)) {
+			if (Input.GetKeyDown (KeyCode.LeftShift)) {
 				if(regrasJogador._movimentoJogador.getDirecao() == "esquerda")
 					regrasJogador._movimentoJogador.dash (Vector3.left,regrasJogador._movimentoJogador.dashpower);
 				if(regrasJogador._movimentoJogador.getDirecao() == "direita" ) 
@@ -248,7 +248,7 @@ public class RegrasJogador : MonoBehaviour {
 		}
 		// ********** SE MODO DE ESTADO FOR PARA PAREDE OU JOGADOR SOBRE PAREDE *************/
 		if (regrasJogador._dadosJogador.dadosJogador.getTipoMovimento () == "MovimentoParede") {
-			regrasJogador._movimentoJogador.MovimentoVertical (Input.GetAxis ("Vertical"), regrasJogador._movimentoJogador.speed);// aciona o movimento do jogador
+			//regrasJogador._movimentoJogador.MovimentoVertical (Input.GetAxis ("Vertical"), regrasJogador._movimentoJogador.speed);// aciona o movimento do jogador
 
 			if ( 
 				regrasJogador._movimentoJogador.getNumPulos () < 2 &&

@@ -60,7 +60,7 @@ public class ItemGeral : MonoBehaviour
 
 
 			if (cl.gameObject.CompareTag ("Player")) {
-				Debug.Log ("jogador pegou o item de nome: " + nome);
+			//	Debug.Log ("jogador pegou o item de nome: " + nome);
 				Efeito ();
 				//dj.dadosJogador.levarDano (dano);
 				Destroy (gameObject);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 [RequireComponent(typeof(DadosInimigo)) ]
+[RequireComponent(typeof(Animator)) ]
 public class MovimentoInimigo : MonoBehaviour {
 
 	// Use this for initialization
@@ -26,14 +27,21 @@ public class MovimentoInimigo : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+			
 
+		// regras do inimigo perseguidor
 			if (GetComponent<DadosInimigo> ().tipoInimigo == "perseguidor" ) {
+				
 				ChecarDistanciaJogador ();
-
+				if (movimentoID == "perseguindo") {
+					GetComponentInChildren<Animator> ().SetBool ("Perseguir", true);
+				} else {
+					GetComponentInChildren<Animator> ().SetBool ("Perseguir", false);
+				}
 			} 
 
 
-
+		// regras do inimigo atirador
 			else if (GetComponent<DadosInimigo> ().tipoInimigo == "atiradorParado") {
 
 

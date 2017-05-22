@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\Cenario\AreaPerseguicao.cs" />
      <Compile Include="Assets\Scripts\Cenario\ElementoCenario.cs" />
      <Compile Include="Assets\Scripts\Cenario\Escada.cs" />
+     <Compile Include="Assets\Scripts\Cenario\Esconderijo.cs" />
      <Compile Include="Assets\Scripts\Cenario\MorteTrigger.cs" />
      <Compile Include="Assets\Scripts\Constantes.cs" />
      <Compile Include="Assets\Scripts\Inimigo\MovimentoInimigo.cs" />
