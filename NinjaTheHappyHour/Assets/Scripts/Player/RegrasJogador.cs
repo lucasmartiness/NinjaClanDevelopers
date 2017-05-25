@@ -116,7 +116,10 @@ public class RegrasJogador : MonoBehaviour {
 			//Rigidbody2D rb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D> ();
 			//rb.velocity = new Vector2 (rb.velocity.x, 0);
 			//Debug.Log ("teste colisão com parede");
-
+			// desligado o movimento se subir parede
+			// desligado o movimento se subir parede
+			// desligado o movimento se subir parede
+			// desligado o movimento se subir parede
 			regrasJogador._dadosJogador.dadosJogador.setTipoMovimento ("MovimentoParede");
 			if (regrasJogador._movimentoJogador.movement.y > 0 || regrasJogador._movimentoJogador.GetComponent<Rigidbody2D> ().velocity.y > 0) { // subindo
 				//_dadosJogador.dadosJogador.setAcao ("SubindoParede");
@@ -148,11 +151,15 @@ public class RegrasJogador : MonoBehaviour {
 
 		*/
 		/**********MODO DE ESTADO NÃO ESCORADO NA PAREDE**************/
+		// se estiver fora da escada e da parede então está no chão
 		if (!regrasJogador._movimentoJogador.getEscoradoParede() &&
-			!regrasJogador._movimentoJogador.dentroDaEscada ) {// se estiver fora da escada e da parede então está no chão
+			!regrasJogador._movimentoJogador.dentroDaEscada ) {
 
 			//MovimentoSimples
 			regrasJogador._dadosJogador.dadosJogador.setTipoMovimento ("MovimentoSimples");// SET MODO DE ESTADO OU TIPO DE MOVIMENTO PARA SIMPLES CASO NÃO ESTEJA NA PAREDE
+
+
+
 			if (Input.GetAxis ("Horizontal") != 0 &&regrasJogador._movimentoJogador.movement.y == 0) {		// existe movimento horizontal mas não vertical
 
 				regrasJogador._dadosJogador.dadosJogador.setAcao ("AndandoHorizontal");
@@ -168,10 +175,19 @@ public class RegrasJogador : MonoBehaviour {
 				regrasJogador._dadosJogador.dadosJogador.setAcao ("Caindo");
 			}
 
+			if (Input.GetButton ("Fire1")) {
+			regrasJogador._dadosJogador.dadosJogador.setAcao ("Atacar");
+			} 
+			if (Input.GetKey ( KeyCode .S) ) {
+				regrasJogador._dadosJogador.dadosJogador.setAcao ("Agachar");
+			}
+
+
 		}
 		/*******************************************************************************************************************************/
 		// ESTADOS ANIMAÇÕES
 		/*******************************************************************************************************************************/
+
 		if ( regrasJogador._dadosJogador.dadosJogador.getAcao() == "AndandoHorizontal") {
 			regrasJogador._spriteController.executarAnimacaoJogador ("Correr");
 		}
@@ -183,6 +199,14 @@ public class RegrasJogador : MonoBehaviour {
 		}	
 		if (regrasJogador._dadosJogador.dadosJogador.getAcao () == "Caindo") {
 			regrasJogador._spriteController.executarAnimacaoJogador ("Cair");
+		}
+	
+		if (regrasJogador._dadosJogador.dadosJogador.getAcao () == "Atacar") {
+			regrasJogador._spriteController.executarAnimacaoJogador ("Atacar");
+		}
+
+		if (regrasJogador._dadosJogador.dadosJogador.getAcao () == "Agachar") {
+			regrasJogador._spriteController.executarAnimacaoJogador ("Agachar");
 		}
 		/*******************************************************************************************************************************/
 
@@ -207,9 +231,16 @@ public class RegrasJogador : MonoBehaviour {
 
 		// captura movimento e pulo
 		// ****** SE MODO DE ESTADO FOR PARA MOVIMENTO SIMPLES ENTÃO CAPTURE TECLAS PARA MOVIMENTO SIMPLES *************/
+
+		if (regrasJogador._dadosJogador.dadosJogador.getTipoMovimento () == "Ataque") {
+		
+		}
+
 		if (regrasJogador._dadosJogador.dadosJogador.getTipoMovimento () == "MovimentoSimples" &&
 			!regrasJogador._movimentoJogador.dentroDaEscada ) {
 
+
+			if (regrasJogador._dadosJogador.dadosJogador.getAcao () != "Agachar" )
 			regrasJogador._movimentoJogador.MovimentoHorizontal (Input.GetAxis ("Horizontal"), regrasJogador._movimentoJogador.speed);// aciona o movimento do jogador
 
 			//*****************SE FOR EXECUTADO O PULO ***********************/
@@ -229,8 +260,8 @@ public class RegrasJogador : MonoBehaviour {
 			// ****************** SE O JOGADOR SE AGAIXAR ************************/
 			if (Input.GetKeyDown(KeyCode.S)) {
 				regrasJogador._movimentoJogador.agachar ();
-				regrasJogador._dadosJogador.dadosJogador.acao1 = "Agachado";
-				regrasJogador._dadosJogador.dadosJogador.setAcao ("Agachado");
+				regrasJogador._dadosJogador.dadosJogador.acao1 = "Agachar";
+				regrasJogador._dadosJogador.dadosJogador. setAcao ("Agachar");
 			}
 			// ****************** SE O JOGADOR SE LEVANTAR ************************/
 			if ( Input.GetKeyUp(KeyCode.S)  ) {
@@ -290,7 +321,8 @@ public class RegrasJogador : MonoBehaviour {
 	*/
 		// se click de ataque
 		if(Input.GetButtonUp("Fire1") && !regrasJogador._movimentoJogador.escoradoNaParede ) { 
-
+		//	regrasJogador._dadosJogador.dadosJogador.setAcao ("Atacar");
+			regrasJogador._spriteController.executarAnimacaoJogador ("Atacar");
 			// se esquerda aponte o ataque a esquerda
 			if (regrasJogador._movimentoJogador.getDirecao() == "esquerda") {
 				GameObject.FindGameObjectWithTag ("Player").GetComponent<Ataques> ().AtaqueSabre (regrasJogador._movimentoJogador.transform.position + new Vector3(-2,0,0), true,"AtaqueEspadaSimples");

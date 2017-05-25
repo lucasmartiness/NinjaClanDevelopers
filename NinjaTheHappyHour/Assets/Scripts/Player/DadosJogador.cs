@@ -50,10 +50,12 @@ public class DadosJogador : MonoBehaviour {
 				this.acao1 = acao;
 			} else if (acao == "Parado") {
 				this.acao1 = acao;
-			} else if (acao == "Agachado") {
+			} else if (acao == "Agachar") {
 				this.acao1 = acao;
 			}
-
+			else if (acao == "Atacar") {
+				this.acao1 = acao;
+			}
 			else{ Debug.Log("erro, ação não reconhecida: "+acao ) ;}
 			//this.acao = acao;
 		}
