@@ -90,7 +90,7 @@ public class RegrasJogador : MonoBehaviour {
 			// se o jogador só tem numero de chances suficientes
 			regrasJogador._dadosJogador.dadosJogador.vida = 6;
 			regrasJogador.chances--;
-			SceneManager.LoadScene ("PrototipoBasico4");
+			SceneManager.LoadScene ("Faze1");
 			// se o jogador não tem chances não então execute denovo a cena ou chame game over
 			if (chances <= 0) {
 			//	Debug.Log ("FIM DA FAZE chances = " + regrasJogador.chances);
