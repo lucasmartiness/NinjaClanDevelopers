@@ -19,3 +19,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu/LoadSave.unity
   - enabled: 1
     path: Assets/Scenes/PrototipoBasico4.unity
+  - enabled: 1
+    path: Assets/Scenes/Faze1.unity

@@ -641,7 +641,7 @@ Prefab:
     - target: {fileID: 114358492009891898, guid: c9acc6e2ab8f7344398436ee7676a183,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: PrototipoBasico4
+      value: Faze1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c9acc6e2ab8f7344398436ee7676a183, type: 2}

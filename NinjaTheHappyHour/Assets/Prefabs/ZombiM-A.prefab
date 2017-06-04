@@ -68,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1155584993359344}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.34, y: -7.44, z: 112.09688}
+  m_LocalPosition: {x: -3.3, y: -7.28, z: 112.09688}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4466980939439878}
@@ -138,8 +138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movimentoID: andar
-  posInicial: {x: -15.34, y: 13, z: 0.296875}
-  posFinal: {x: -11, y: 1.76, z: 0}
+  posInicial: {x: -3.3, y: -7.28, z: 112.0969}
+  posFinal: {x: 1, y: -7.28, z: 112.0969}
   distancia: 5
   velocidade: 0.1
   DistanciaPerseguicao: 10
@@ -176,9 +176,10 @@ MonoBehaviour:
     type: 2}
   forcaTiro: 300
   maquinaAutoExecutora: 0
-  tipoArma: canhaoVerde
+  tipoArma: espadada
   posicaoTiro: {x: 0, y: 0, z: 0}
   isLeft: 0
+  jogadorEscondido: 0
   acaoAtaque: 
 --- !u!212 &212216514155371514
 SpriteRenderer:

@@ -17,7 +17,7 @@ public class Esconderijo : MonoBehaviour {
 
 
 		float distanciaMaxX = 15;
-
+		if (Input.GetKeyDown ( KeyCode.S) ) 
 		if (cl.gameObject.CompareTag ("Player")) {
 
 			cl.gameObject.GetComponentInChildren<SpriteRenderer> ().color = Color.black;
