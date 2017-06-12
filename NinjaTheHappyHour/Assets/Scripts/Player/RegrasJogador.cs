@@ -64,13 +64,14 @@ public class RegrasJogador : MonoBehaviour {
 	}
 	void FixedUpdate()
 	{
-		GameObject.Find ("contadorChances").GetComponent<Text> ().text = chances.ToString ();
+		
+
 		if (_movimentoJogador != null
 		    && _spriteController != null
 		    && _dadosJogador != null
 		    && jogadorX != null) {
 
-
+			GameObject.Find ("contadorChances").GetComponent<Text> ().text = chances.ToString ();
 			// CAPTURAR INPUT 
 			CapturarInput ();
 		//	Debug.Log ("quantidade de chances: " + chances);

@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1683078395159642}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.457481, y: -8.104251, z: 112.09688}
+  m_LocalPosition: {x: 23.457481, y: -8.104251, z: 0}
   m_LocalScale: {x: -0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4422355530236114}
@@ -176,6 +176,7 @@ MonoBehaviour:
   tipoArma: canhaoVerde
   posicaoTiro: {x: 1.68, y: 0.41, z: 0}
   isLeft: 0
+  jogadorEscondido: 0
   acaoAtaque: 
 --- !u!212 &212280912575947454
 SpriteRenderer:

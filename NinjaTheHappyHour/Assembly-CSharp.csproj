@@ -56,7 +56,7 @@
      <Compile Include="Assets\Scripts\Cenario\ElementoCenario.cs" />
      <Compile Include="Assets\Scripts\Cenario\Escada.cs" />
      <Compile Include="Assets\Scripts\Cenario\Esconderijo.cs" />
-     <Compile Include="Assets\Scripts\Cenario\MorteTrigger.cs" />
+     <Compile Include="Assets\Scripts\Cenario\Trigger.cs" />
      <Compile Include="Assets\Scripts\Constantes.cs" />
      <Compile Include="Assets\Scripts\Inimigo\MovimentoInimigo.cs" />
      <Compile Include="Assets\Scripts\Interface\ControladoraInterface.cs" />
@@ -98,6 +98,7 @@
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TiledInitialShaderProperties.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TiledMap.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TmxObject.cs" />
+     <Compile Include="Assets\TriggerEnum.cs" />
      <None Include="Assets\Fonts\Read me.txt" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDefault.shader" />
      <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
@@ -113,8 +114,12 @@
      <None Include="Assets\Tiled2Unity\Shaders\shaDepthColorKey.shader" />
      <None Include="Assets\Tiled2Unity\License.txt" />
      <None Include="Assets\Tiled2Unity\Imported\cenario.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\cenario2.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
      <None Include="Assets\Tiled2Unity\Meshes\_ReadMe.txt" />
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -129,6 +134,9 @@
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Purchasing">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityPurchasing/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>

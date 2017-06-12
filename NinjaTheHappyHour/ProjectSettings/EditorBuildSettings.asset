@@ -21,3 +21,5 @@ EditorBuildSettings:
     path: Assets/Scenes/PrototipoBasico4.unity
   - enabled: 1
     path: Assets/Scenes/Faze1.unity
+  - enabled: 1
+    path: Assets/Scenes/Faze2.unity
